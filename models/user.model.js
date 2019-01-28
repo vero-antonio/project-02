@@ -4,15 +4,17 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: "Name is required"
+        required: "Name is required",
+        //se lo pedimos a fb
     },
     social: {
         facebookId: String,
     },
     photo: {
         // buscar en ironsolutions
+        // se lo pedimos a fb
     },
-    intrests: {
+    interests: {
         type: [String],
         enum: constants.CATEGORIES
         // do the list of categories
