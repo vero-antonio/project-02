@@ -30,6 +30,9 @@ function authenticateOAuthUser(accessToken, refreshToken, profile, next) {
       } else {
         user = new User({
           //buscar cómo sacar la foto de fb
+          // likes: profile.user_likes, we can put more permissions but have to submit
+          // the app for facebook to review it usually takes 2-3 days to get approval.
+          photo: profile.picture,
           name: profile.displayName,
           email: profile.emails[0].value,
           password: Math.random().toString(36).substring(7),
