@@ -7,11 +7,16 @@ const userSchema = new mongoose.Schema({
         required: "Name is required",
         //se lo pedimos a fb
     },
+    email: {
+        type: String,
+        required: "Email is required",
+        //se lo pedimos a fb
+    },
     social: {
         facebookId: String,
     },
     photo: {
-        // buscar en ironsolutions
+        type: String
         // se lo pedimos a fb
     },
     interests: {

@@ -1,9 +1,18 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+// const constants = require('../constants');
+const passport = require('passport');
+const usersController = require('../controllers/users.controller');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/login', usersController.login);
+
+router.post('/facebook', passport.authenticate('facebook-auth', { scope: ['email'] }));
+
+router.get('/:provider/cb', usersController.createWithIDPCallback);
+
 
 module.exports = router;
+
+
+
+

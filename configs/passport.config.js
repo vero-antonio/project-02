@@ -17,8 +17,8 @@ passport.deserializeUser((id, next) => {
 passport.use('facebook-auth', new FBStrategy({
   clientID: process.env.FB_AUTH_CLIENT_ID || 'todo',
   clientSecret: process.env.FB_AUTH_CLIENT_SECRET || 'todo',
-  callbackURL: process.env.FB_AUTH_CB || '/sessions/facebook/cb',
-  profileFields: ['displayName', 'emails']
+  callbackURL: process.env.FB_AUTH_CB || '/users/facebook/cb',
+  profileFields: ['displayName', 'emails'] //'profile_pic'
 }, authenticateOAuthUser));
 
 function authenticateOAuthUser(accessToken, refreshToken, profile, next) {
@@ -32,10 +32,9 @@ function authenticateOAuthUser(accessToken, refreshToken, profile, next) {
           //buscar cómo sacar la foto de fb
           // likes: profile.user_likes, we can put more permissions but have to submit
           // the app for facebook to review it usually takes 2-3 days to get approval.
-          photo: profile.picture,
           name: profile.displayName,
           email: profile.emails[0].value,
-          password: Math.random().toString(36).substring(7),
+          // photo: profile.profile_pic,
           social: {
             [socialId]: profile.id
           }
