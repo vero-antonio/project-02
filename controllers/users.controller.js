@@ -8,5 +8,5 @@ module.exports.categories = (req, res, next) => {
 }
 
 module.exports.home = (req, res, next) => {
-  res.render("users/home")
+  res.render('session/home')
 }

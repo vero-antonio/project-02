@@ -17,7 +17,7 @@ passport.deserializeUser((id, next) => {
 passport.use('facebook-auth', new FBStrategy({
   clientID: process.env.FB_AUTH_CLIENT_ID || 'todo',
   clientSecret: process.env.FB_AUTH_CLIENT_SECRET || 'todo',
-  callbackURL: process.env.FB_AUTH_CB || '/users/facebook/cb',
+  callbackURL: process.env.FB_AUTH_CB || '/session/facebook/cb',
   profileFields: ['displayName', 'emails', 'picture.type(large)'] 
 }, authenticateOAuthUser));
 

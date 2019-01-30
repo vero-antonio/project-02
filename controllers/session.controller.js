@@ -1,7 +1,11 @@
+const createError = require('http-errors');
+const mongoose = require('mongoose');
+const User = require('../models/user.model');
+const passport = require('passport');
 
 
 module.exports.login = (req, res, next) => {
-    res.render('users/login');
+    res.render('session/login');
   }
   
 module.exports.doLogin = (req, res, next) => {
@@ -15,7 +19,7 @@ module.exports.doLogin = (req, res, next) => {
           if (error){ 
             next(error);
           } else {
-            res.redirect('/users/home');
+            res.redirect('/home');
           }
         });
       } 

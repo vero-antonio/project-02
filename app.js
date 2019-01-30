@@ -15,6 +15,8 @@ require('./configs/hbs.config');
 require('./configs/passport.config');
 
 const usersRouter = require('./routes/users.routes');
+const sessionRouter = require('./routes/session.routes');
+
 
 const app = express();
 
@@ -52,7 +54,9 @@ app.use((req, res, next) => {
 })
 
 
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
+app.use('/session', sessionRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
