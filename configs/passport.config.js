@@ -18,23 +18,23 @@ passport.use('facebook-auth', new FBStrategy({
   clientID: process.env.FB_AUTH_CLIENT_ID || 'todo',
   clientSecret: process.env.FB_AUTH_CLIENT_SECRET || 'todo',
   callbackURL: process.env.FB_AUTH_CB || '/users/facebook/cb',
-  profileFields: ['displayName', 'emails'] //'profile_pic'
+  profileFields: ['displayName', 'emails', 'picture.type(large)'] 
 }, authenticateOAuthUser));
 
 function authenticateOAuthUser(accessToken, refreshToken, profile, next) {
   let socialId = `${profile.provider}Id`;
+  console.log(profile);
   User.findOne({ [`social.${socialId}`]: profile.id })
     .then(user => {
       if (user) {
         next(null, user);
       } else {
-        user = new User({
-          //buscar cómo sacar la foto de fb
+        user = new User({          
           // likes: profile.user_likes, we can put more permissions but have to submit
           // the app for facebook to review it usually takes 2-3 days to get approval.
           name: profile.displayName,
           email: profile.emails[0].value,
-          // photo: profile.profile_pic,
+          photo: profile.photos[0].value,
           social: {
             [socialId]: profile.id
           }

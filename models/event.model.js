@@ -5,7 +5,6 @@ const eventSchema = new mongoose.Schema({
     name: {
         type: String,
         required: 'Name is required',
-        //match: regex
     },
     dateStart: {
         type: Date,
@@ -26,13 +25,18 @@ const eventSchema = new mongoose.Schema({
         type: String
     },
     owner: {
-        //buscar en movies cómo se relaciona
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
     tags: {
         type: [String],
         enum: constants.CATEGORIES
         // do the list of categories
         // middleware to check for interests
+    },
+    maxUsers: {
+        type: Number,
+        
     }
 }, {timestamps: true});
 
