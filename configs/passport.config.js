@@ -23,7 +23,6 @@ passport.use('facebook-auth', new FBStrategy({
 
 function authenticateOAuthUser(accessToken, refreshToken, profile, next) {
   let socialId = `${profile.provider}Id`;
-  console.log(profile);
   User.findOne({ [`social.${socialId}`]: profile.id })
     .then(user => {
       if (user) {

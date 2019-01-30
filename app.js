@@ -5,14 +5,16 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
+const MongoStore = require("connect-mongo")(session);
 const passport = require('passport');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 require('./configs/db.config');
 require('./configs/hbs.config');
 require('./configs/passport.config');
 
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users.routes');
 
 const app = express();
 
@@ -25,7 +27,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: 'SuperSecret - (Change it)',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 60 * 60 * 24 * 1000
+  },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60
+  })
+}));
+
 app.use(passport.initialize());
+app.use(passport.session());
+
+app.use((req, res, next) => {
+  res.locals.session = req.user;
+  next();
+})
 
 
 app.use('/users', usersRouter);
