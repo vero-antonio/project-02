@@ -14,10 +14,10 @@ const eventSchema = new mongoose.Schema({
         type: Date,
         required: 'Date finish is required'
     },
-    location: {
-        type: { type: String }, 
-        coordinates: [Number]
-    },
+    // location: {
+    //     type: { type: String }, 
+    //     coordinates: [Number]
+    // },
     picture: {
         //buscar cómo se monta 
     },
@@ -40,7 +40,7 @@ const eventSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-eventSchema.index({ location: '2dsphere'});
+// eventSchema.index({ location: '2dsphere'});
 
 const Event = mongoose.model("Event", eventSchema);
 module.exports = Event;

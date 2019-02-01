@@ -17,9 +17,9 @@ module.exports.createEvent = (req, res, next) => {
 }
 
 module.exports.doCreateEvent = (req, res, next) => {
-  console.log(req.body);
   // const event = new Event(req.body);
+  // console.log(event);
   // event.save()
-  //   .then((event) => { res.redirect('/home' )});
-  res.redirect('/home');
+  //   .then((event) => { res.redirect('/home')});
+  res.redirect('/home')
 }
