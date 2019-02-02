@@ -1,3 +1,19 @@
-<h1>
-    Categories
-</h1>
+<div class="container">
+    <div class="row">
+        {{#each allCategories as |category|}}
+            <div class="col-4 mb-2 mt-2">
+                <div class="card categories" style="width: 18rem;" data-category='{{category.id}}'>
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">{{category.name}}</p>
+                </div>
+                </div>
+            </div>
+        {{/each}}
+
+        <form id="categories-form" action="/categories" method='post'>
+            <button class="btn btn-primary btn-block" type="submit">Done</button>
+        </form>
+    </div>
+</div>
+

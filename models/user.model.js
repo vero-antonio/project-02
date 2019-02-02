@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     interests: {
         type: [String],
-        enum: constants.CATEGORIES
+        enum: constants.CATEGORIES.map(({ id }) => id)
         // middleware to check for interests
     },
 }, {timestamps: true})

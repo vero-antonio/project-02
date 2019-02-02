@@ -16,6 +16,7 @@ require('./configs/passport.config');
 
 const usersRouter = require('./routes/users.routes');
 const sessionRouter = require('./routes/session.routes');
+const constants = require('./constants');
 
 
 const app = express();
@@ -50,12 +51,14 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
   res.locals.session = req.user;
+  res.locals.allCategories = constants.CATEGORIES;
   next();
 })
 
 
 app.use('/', usersRouter);
 app.use('/session', sessionRouter);
+app.get('/', (req, res) => res.redirect('/home'));
 
 
 // catch 404 and forward to error handler

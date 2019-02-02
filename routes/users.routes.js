@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
-// const constants = require('../constants');
+const constants = require('../constants');
 const usersController = require('../controllers/users.controller');
 const userMiddleware = require('../middlewares/user.middlewares');
 
-router.get('/home', /*userMiddleware.haveInterests,*/ usersController.home); // is Authenticated
-router.get('/categories', usersController.categories);
-router.get('/create-event', usersController.createEvent);
-router.post('/create-event', usersController.doCreateEvent);
+router.get('/home', userMiddleware.isAuthenticated,userMiddleware.haveInterests, usersController.home); // is Authenticated
+router.get('/categories', userMiddleware.isAuthenticated,usersController.categories);
+router.post('/categories', userMiddleware.isAuthenticated,usersController.updateCategories);
+router.get('/create-event', userMiddleware.isAuthenticated,usersController.createEvent);
+router.post('/create-event', userMiddleware.isAuthenticated,usersController.doCreateEvent);
 
 module.exports = router;
 

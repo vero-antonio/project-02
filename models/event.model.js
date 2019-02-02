@@ -18,9 +18,9 @@ const eventSchema = new mongoose.Schema({
     //     type: { type: String }, 
     //     coordinates: [Number]
     // },
-    picture: {
-        //buscar cómo se monta 
-    },
+    // picture: {
+    //     //buscar cómo se monta 
+    // },
     description: {
         type: String
     },
@@ -30,7 +30,7 @@ const eventSchema = new mongoose.Schema({
     },
     tags: {
         type: [String],
-        enum: constants.CATEGORIES
+        enum: constants.CATEGORIES.map(({ id }) => id)
         // do the list of categories
         // middleware to check for interests
     },

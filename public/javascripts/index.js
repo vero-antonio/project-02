@@ -74,3 +74,21 @@ function centerMapOnBrowser() {
 //   window.map.addMarker(lat, lng, id);
 // }
 
+$(".card.categories").click(function() {
+  const category = this.dataset.category;
+
+  $(this).toggleClass('selected');
+
+  if ($(this).hasClass('selected')) {    
+    const newInput = document.createElement('input');
+
+    newInput.name = 'interests';
+    newInput.value = category;
+    newInput.id = `category-${category}`;
+    newInput.display = 'none';
+
+    $("#categories-form").append(newInput);
+  } else {
+    $(`#categories-form #category-${category}`).remove();
+  }
+})

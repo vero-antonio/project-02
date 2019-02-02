@@ -15,7 +15,6 @@ module.exports.doLogin = (req, res, next) => {
         next(error);
       } else {
         req.login(user, (error) => {
-          console.log({ user });
           if (error){ 
             next(error);
           } else {
@@ -24,6 +23,11 @@ module.exports.doLogin = (req, res, next) => {
         });
       } 
     })(req, res, next);
+  }
+
+  module.exports.delete = (req, res, next) => {
+    req.logout();
+    res.redirect('/session/login');
   }
 
   

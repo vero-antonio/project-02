@@ -12,3 +12,11 @@ a {
   height: 400px;
   margin-top:  20px;
 }
+
+.card.selected {
+  opacity: 0.4;
+}
+
+#categories-form input {
+  display: none;
+}

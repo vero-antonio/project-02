@@ -8,6 +8,15 @@ module.exports.categories = (req, res, next) => {
   res.render('users/categories');
 }
 
+module.exports.updateCategories = (req, res, next) => {
+  console.log(req.body)
+
+  req.user.interests = req.body.interests;
+
+  req.user.save()
+    .then(() => res.redirect('/'))
+}
+
 module.exports.home = (req, res, next) => {
   res.render('session/home');
 }
