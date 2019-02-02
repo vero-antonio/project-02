@@ -9,7 +9,6 @@ module.exports.categories = (req, res, next) => {
 }
 
 module.exports.updateCategories = (req, res, next) => {
-  console.log(req.body)
 
   req.user.interests = req.body.interests;
 
@@ -18,7 +17,7 @@ module.exports.updateCategories = (req, res, next) => {
 }
 
 module.exports.home = (req, res, next) => {
-  res.render('session/home');
+  res.render('users/home');
 }
 
 module.exports.createEvent = (req, res, next) => {
@@ -27,7 +26,7 @@ module.exports.createEvent = (req, res, next) => {
 
 module.exports.doCreateEvent = (req, res, next) => {
   const event = new Event(req.body);
-  console.log(event);
+
   event.save()
     .then((event) => { res.redirect('/home')});
   // res.redirect('/home')
