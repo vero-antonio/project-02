@@ -8,7 +8,17 @@ function initMap() {
 
   if (navigator.geolocation) {
     centerMapOnBrowser();
-  }
+
+    // means we are on create users page!
+    // if (document.getElementById("create-event")) {
+    //   console.log('create-event');
+      window.map.onClick((event) => {
+        // console.log(event.latLng.lat());
+      window.map.addMarker(event.latLng.lat(), event.latLng.lng());
+      })
+      }
+    }
+  // }
 
   // // means we are on create users page!
   // if (document.getElementById("home")) {
@@ -21,8 +31,8 @@ function initMap() {
   // } else if (document.getElementById("list-users")) {
   //   addUsersMarkers();
   // }
-}
 
+  
 function centerMapOnBrowser() {
   navigator.geolocation.getCurrentPosition((position) => {
     window.map.googleMap.setCenter({
@@ -30,42 +40,37 @@ function centerMapOnBrowser() {
       lng: position.coords.longitude
     });
 
-    window.map.googleMap.setZoom(16);
-
-    // means we are on create users page!
-    if (document.getElementById("create-user")) {
-      addMarkerAndUpateForm(position.coords.latitude, position.coords.longitude);
-    }
+  window.map.googleMap.setZoom(16);
   });
 }
 
-function addMarkerAndUpateForm(lat, lng) {
-  window.map.addMarker(lat, lng);
+// function addMarkerAndUpateForm(lat, lng) {
+//   window.map.addMarker(lat, lng);
 
-  document.getElementById('latitude').value = lat.toFixed(3);
-  document.getElementById('longitude').value = lng.toFixed(3);
-}
+//   document.getElementById('latitude').value = lat.toFixed(3);
+//   document.getElementById('longitude').value = lng.toFixed(3);
+// }
 
-function addUsersMarkers() {
-  const liElements = document.getElementsByClassName("user-item");
+// function addUsersMarkers() {
+//   const liElements = document.getElementsByClassName("user-item");
 
-  for (let i = 0; i < liElements.length; i++) {
-    addUserMarker(liElements[i].dataset.location, liElements[i].dataset.id);
+//   for (let i = 0; i < liElements.length; i++) {
+//     addUserMarker(liElements[i].dataset.location, liElements[i].dataset.id);
 
-    liElements[i].addEventListener("mouseover", function() {
-      window.map.showOnlyMarker(this.dataset.id);
-    });
+//     liElements[i].addEventListener("mouseover", function() {
+//       window.map.showOnlyMarker(this.dataset.id);
+//     });
 
-    liElements[i].addEventListener("mouseout", function() {
-      window.map.showAllMarkers();
-    });
-  }
-}
+//     liElements[i].addEventListener("mouseout", function() {
+//       window.map.showAllMarkers();
+//     });
+//   }
+// }
 
-function addUserMarker(lngLatString, id) {
-  const lat = Number(lngLatString.split(',')[1]);
-  const lng = Number(lngLatString.split(',')[0]);
+// function addUserMarker(lngLatString, id) {
+//   const lat = Number(lngLatString.split(',')[1]);
+//   const lng = Number(lngLatString.split(',')[0]);
 
-  window.map.addMarker(lat, lng, id);
-}
+//   window.map.addMarker(lat, lng, id);
+// }
 

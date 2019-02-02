@@ -14,18 +14,21 @@ class Map {
       zoom: 16,
       center: sol
     });
+    // new google.maps.Marker({
+    //   position: sol,
+    //   map: this.googleMap,
+    // });
+  }
+
+  addMarker(lat, lng, id) {
     new google.maps.Marker({
-      position: sol,
+      position: { lat, lng },
       map: this.googleMap,
+      id: id
     });
   }
 
-  // addMarker(lat, lng, id) {
-  //   const marker = new google.maps.Marker({
-  //     position: { lat, lng },
-  //     map: this.googleMap,
-  //     id: id
-  //   });
+
 
   //   this.markers.push(marker);
   // }
@@ -35,9 +38,9 @@ class Map {
 //     this.markers = [];
 //   }
 
-//   onClick(cb) {
-//     this.googleMap.addListener('click', cb);
-//   }
+  onClick(cb) {
+    this.googleMap.addListener('click', cb);
+  }
 
 //   showOnlyMarker(markerId) {
 //     this.markers.forEach(marker => {
