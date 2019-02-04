@@ -8,19 +8,20 @@ const eventSchema = new mongoose.Schema({
     },
     dateStart: {
         type: Date,
-        required: 'Date start is required',
+        // required: 'Date start is required',
     },
     dateEnd: {
         type: Date,
-        required: 'Date finish is required'
+        // required: 'Date finish is required'
     },
     // location: {
     //     type: { type: String }, 
     //     coordinates: [Number]
     // },
-    // picture: {
-    //     //buscar cómo se monta 
-    // },
+    picture: {
+        type: String,
+        default: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
+    },
     description: {
         type: String
     },
