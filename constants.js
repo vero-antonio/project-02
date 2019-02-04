@@ -1,112 +1,65 @@
 module.exports = {
         CATEGORIES: [
         {
-            photo: "",
-            id: "nature",
-            name: "Nature and Adventure",
-        }, 
-       {    
-            id: "tech",
-            photo: "",
-            name: "Technology and Inovation",
-        }, 
-        music = {
-            photo: "",
-            name: "Concerts and Parties"
-        }, 
-        {
             id: "social",
-            photo: "",
-            name: "Social"
-        }, 
+            photo: "/images/social01.JPG",
+            name: "Social Networking"
+        },        
         {
-            id: "culture",
-            photo: "",
-            name: "Culture"
+            id: "music",
+            photo: "/images/dancing01.JPG",
+            name: "Concerts & Parties"
         }, 
         {
             id: "cinema",
-            photo: "",
-            name: "Cinema"
-        }, 
+            photo: "/images/cinema.JPG",
+            name: "Movies & Film"
+        },
         {
-            id: "art",
-            photo: "",
-            name: "Art"
-        }, 
-        {
-            id: "dancing",
-            photo: "",
-            name: "Dance"
+            id: "gaming",
+            photo: "/images/gaming02.JPG",
+            name: "Sci-Fi & Games"
         }, 
         {
             id: "food",
-            photo: "",
-            name: "Gastronomy",
+            photo: "/images/food01.JPG",
+            name: "Food & Drink",
         }, 
         {
-            id: "gaming",
-            photo: "",
-            name: "Gaming"
+            id: "pets",
+            photo: "/images/pets.JPG",
+            name: "Pets & Animals"
+        },
+        {
+            id: "fashion",
+            photo: "/images/fashion02.JPG",
+            name: "Fashion & Beauty"
         }, 
+        {
+            id: "nature",
+            photo: "/images/nature.JPG",
+            name: "Nature & Adventure",
+        },
         {
             id: "diy",
-            photo: "",
-            name: "Do It Yourself"
+            photo: "/images/diy03.JPG",
+            name: "Hobbies & Crafts"
+        }, 
+        {
+            id: "culture",
+            photo: "/images/culture01.JPG",
+            name: "Language & Culture"
         }, 
         {
             id: "sports",
-            photo: "",
-            name: "Sports"
-        }
+            photo: "/images/sports.JPG",
+            name: "Sports & Fitness"
+        },
+        {    
+            id: "tech",
+            photo: "/images/tech01.JPG",
+            name: "Technology & Inovation",
+        }, 
+
     ]
 }
-
-// nature = {
-//     photo: "",
-//     name: "Nature and Adventure",
-// }, 
-// tech = {
-//     photo: "",
-//     name: "Technology and Inovation",
-// }, 
-// music = {
-//     photo: "",
-//     name: "Concerts and Parties"
-// }, 
-// social = {
-//     photo: "",
-//     name: "Social"
-// }, 
-// culture = {
-//     photo: "",
-//     name: "Culture"
-// }, 
-// cinema = {
-//     photo: "",
-//     name: "Cinema"
-// }, 
-// art = {
-//     photo: "",
-//     name: "Art"
-// }, 
-// dancing = {
-//     photo: "",
-//     name: "Dance"
-// }, 
-// food = {
-//     photo: "",
-//     name: "Gastronomy",
-// }, 
-// gaming = {
-//     photo: "",
-//     name: "Gaming"
-// }, 
-// diy = {
-//     photo: "",
-//     name: "Do It Yourself"
-// }, 
-// sports = {
-//     photo: "",
-//     name: "Sports"
-// }

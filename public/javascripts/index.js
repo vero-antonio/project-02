@@ -9,16 +9,25 @@ function initMap() {
   if (navigator.geolocation) {
     centerMapOnBrowser();
 
-    // means we are on create users page!
-    // if (document.getElementById("create-event")) {
-    //   console.log('create-event');
+    //means we are on create users page!
+    if (document.getElementById("create-event")) {
       window.map.onClick((event) => {
-        // console.log(event.latLng.lat());
-      window.map.addMarker(event.latLng.lat(), event.latLng.lng());
+        if (window.map.markers.length === 0) {
+          window.map.addMarker(event.latLng.lat(), event.latLng.lng());
+        } else {
+          window.map.clearMarkers();
+          window.map.addMarker(event.latLng.lat(), event.latLng.lng());
+        }
       })
-      }
     }
-  // }
+  }
+}
+  
+//   google.maps.event.addListener(map, 'click', function(event) {
+//     setMapOnAll(null);
+//     placeMarker(event.latLng);
+// }
+
 
   // // means we are on create users page!
   // if (document.getElementById("home")) {

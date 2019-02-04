@@ -14,29 +14,35 @@ class Map {
       zoom: 16,
       center: sol
     });
-    // new google.maps.Marker({
-    //   position: sol,
-    //   map: this.googleMap,
-    // });
   }
 
   addMarker(lat, lng, id) {
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: { lat, lng },
       map: this.googleMap,
       id: id
     });
+    this.markers.push(marker);
   }
 
+  clearMarkers() {
+    this.markers.forEach(m => m.setMap(null));
+    this.markers = [];
+  }
 
+  /*
+  setMapOnAll(map) {
+    for (let i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(map);
+    }
+  }
+  
+  clearMarkers() {
+    setMapOnAll(null);
+  }
+  */
 
-  //   this.markers.push(marker);
-  // }
-
-//   clearMarkers() {
-//     this.markers.forEach(m => m.setMap(null));
-//     this.markers = [];
-//   }
+  
 
   onClick(cb) {
     this.googleMap.addListener('click', cb);

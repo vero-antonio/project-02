@@ -20,3 +20,7 @@ a {
 #categories-form input {
   display: none;
 }
+
+.custom-btn {
+  min-width: 150px;
+}
