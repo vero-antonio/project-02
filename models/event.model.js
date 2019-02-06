@@ -29,10 +29,9 @@ const eventSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    tags: {
+    interests: {
         type: [String],
         enum: constants.CATEGORIES.map(({ id }) => id)
-        // middleware to check for interests
     },
     maxUsers: {
         type: Number,

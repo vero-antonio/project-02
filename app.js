@@ -52,6 +52,7 @@ app.use(passport.session());
 app.use((req, res, next) => {
   res.locals.session = req.user;
   res.locals.allCategories = constants.CATEGORIES;
+  // res.locals.event = req.event;
   next();
 })
 
