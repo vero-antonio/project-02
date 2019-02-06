@@ -1,0 +1,8 @@
+<h2 class="m-3">List of events:</h2>
+<ul>
+  {{#each events as |event| }}
+    <li class="list-item"> {{ event.name }} <a class="ml-3" href="/events/event-detail/{{ event.id }}"><em>See detail</em></a></li>
+  {{/each }}
+</ul>
+<a class="btn btn-primary mb-3" href="/events/event-create">New Event</a>
+<a class="btn btn-primary mb-3" href="/">Back</a>

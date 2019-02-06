@@ -66,7 +66,7 @@ class MyMap {
         this.googleMap.setCenter(place.geometry.location);
 
         //means we are on create users page!
-        if (document.getElementById("create-event")) {
+        if (document.getElementById("event-create")) {
           const lat = place.geometry.location.lat();
           const lng = place.geometry.location.lng();
           document.getElementById('latitude').value = lat.toFixed(3);
