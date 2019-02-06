@@ -36,6 +36,5 @@ module.exports.doCreateEvent = (req, res, next) => {
   const event = new Event(eventBody);
 
   event.save()
-    .then((event) => { res.redirect('/home')});
-  // res.redirect('/home')
+    .then((event) => { res.redirect('/events/event')});
 }

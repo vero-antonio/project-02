@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: "Name is required",
-        //se lo pedimos a fb
     },
     email: {
         type: String,
@@ -20,7 +19,6 @@ const userSchema = new mongoose.Schema({
     interests: {
         type: [String],
         enum: constants.CATEGORIES.map(({ id }) => id)
-        // middleware to check for interests
     },
 }, {timestamps: true})
 

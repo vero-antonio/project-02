@@ -16,8 +16,8 @@ require('./configs/passport.config');
 
 const usersRouter = require('./routes/users.routes');
 const sessionRouter = require('./routes/session.routes');
+const eventsRouter = require('./routes/events.routes');
 const constants = require('./constants');
-
 
 const app = express();
 
@@ -58,6 +58,7 @@ app.use((req, res, next) => {
 
 app.use('/', usersRouter);
 app.use('/session', sessionRouter);
+app.use('/events', eventsRouter);
 app.get('/', (req, res) => res.redirect('/home'));
 
 
