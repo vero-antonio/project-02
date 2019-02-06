@@ -11,8 +11,15 @@ function initMap() {
     centerMapOnBrowser();
   }
 
-  // //means we are on create users page!
   // if (document.getElementById("create-event")) {
+  //   if (window.map.markers.length > 0) {
+  //     let lat = window.map.markers[0].position.lat;
+  //     console.log('hola');
+  //     document.getElementById('latitude').value = lat.toFixed(3);
+  //   //   document.getElementById('longitude').value = lng.toFixed(3);
+
+  //   }
+
   //   window.map.onClick((event) => {
   //     if (window.map.markers.length === 0) {
   //       window.map.addMarker(event.latLng.lat(), event.latLng.lng());
@@ -22,7 +29,6 @@ function initMap() {
   //     }
   //   })
   // }
-
 }
 
 
@@ -34,8 +40,6 @@ function centerMapOnBrowser() {
     });
   })   
 }
-  
-
 
 $(".card.categories").click(function() {
   const category = this.dataset.category;
