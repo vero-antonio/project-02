@@ -18,6 +18,7 @@ module.exports.viewEvent = (req, res, next) => {
 
 module.exports.doCreateEvent = (req, res, next) => {
   const eventBody = req.body;
+  console.log(eventBody);
   if ( req.file ) {
     eventBody.picture = req.file.secure_url;
   }
@@ -29,13 +30,13 @@ module.exports.doCreateEvent = (req, res, next) => {
       type: 'Point',
       coordinates: [eventBody.longitude, eventBody.latitude]
     },
-    picture: eventBody.picture, //preguntar a pablo si esto está bien guardado así
+    picture: eventBody.picture,
     description: eventBody.description,
     owner: req.user.id,
-    //tags: , /*añadir mediante middleware*/
+    interests: eventBody.interests, 
     maxUsers: eventBody.maxUsers
   });
 
   event.save()
-    .then((event) => { res.redirect('/events/event-list')});
+    .then((event) => { res.redirect('/events/event-list'), {event}});
 }

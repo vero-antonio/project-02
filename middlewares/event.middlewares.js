@@ -1,10 +1,8 @@
-//const user = require("../models/user.model");
-const createError = require('http-errors');
 
-module.exports.haveInterests = (req, res, next) => {
-    if(req.user.interests && req.user.interests.length > 2){
-        res.render('users/home');
-    } else {
-        res.redirect('/categories');
-    }
-}
+// module.exports.haveTags = (req, res, next) => {
+//     if(req.event.tags && req.event.tags.length > 0){
+//         res.redirect('/events/event-list');
+//     } else {
+//         res.redirect('./users/categories');
+//     }
+// }

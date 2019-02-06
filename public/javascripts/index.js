@@ -48,6 +48,7 @@ $(".card.categories").click(function() {
 
   if ($(this).hasClass('selected')) {    
     const newInput = document.createElement('input');
+    newInput.classList.add("category-input");
 
     newInput.name = 'interests';
     newInput.value = category;
