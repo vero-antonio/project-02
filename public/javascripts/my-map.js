@@ -64,8 +64,17 @@ class MyMap {
         this.addMarker(place.geometry.location.lat(), place.geometry.location.lng());
 
         this.googleMap.setCenter(place.geometry.location);
+
+        //means we are on create users page!
+        if (document.getElementById("create-event")) {
+          const lat = place.geometry.location.lat();
+          const lng = place.geometry.location.lng();
+          document.getElementById('latitude').value = lat.toFixed(3);
+          document.getElementById('longitude').value = lng.toFixed(3);
+        }
       })
     });
+
   }
 
   showOnlyMarker(markerId) {

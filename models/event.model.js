@@ -14,14 +14,14 @@ const eventSchema = new mongoose.Schema({
         type: Date,
         // required: 'Date finish is required'
     },
-    // location: {
-    //     type: { type: String }, 
-    //     coordinates: [Number]
-    // },
+    location: {
+        type: { type: String }, 
+        coordinates: [Number]
+    },
     picture: {
         type: String,
-        default: 'https://res.cloudinary.com/ddby3wqlo/image/upload/v1549447636/event-pics/calendar.jpg'
-        // default: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
+        //default: 'https://res.cloudinary.com/ddby3wqlo/image/upload/v1549447636/event-pics/calendar.jpg'
+        default: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
     },
     description: {
         type: String
@@ -33,7 +33,6 @@ const eventSchema = new mongoose.Schema({
     tags: {
         type: [String],
         enum: constants.CATEGORIES.map(({ id }) => id)
-        // do the list of categories
         // middleware to check for interests
     },
     maxUsers: {
@@ -42,7 +41,7 @@ const eventSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-// eventSchema.index({ location: '2dsphere'});
+eventSchema.index({ location: '2dsphere'});
 
 const Event = mongoose.model("Event", eventSchema);
 module.exports = Event;

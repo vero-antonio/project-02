@@ -9,15 +9,24 @@ module.exports.createEvent = (req, res, next) => {
 }
 
 module.exports.doCreateEvent = (req, res, next) => {
-  console.log(req.body);
   const eventBody = req.body;
-  console.log('file', req.file);
-  console.log('files', req.files);
   if ( req.file ) {
     eventBody.picture = req.file.secure_url;
   }
-  console.log({ eventBody });
-  const event = new Event(eventBody);
+  const event = new Event({
+    name: eventBody.name,
+    dateStart: eventBody.dateStart,
+    dateEnd: eventBody.dateEnd,
+    location: {
+      type: 'Point',
+      coordinates: [eventBody.longitude, eventBody.latitude]
+    },
+    picture: eventBody.picture, //preguntar a pablo si esto está bien guardado así
+    description: eventBody.description,
+    //owner: ,
+    //tags: , /*añadir mediante middleware*/
+    maxUsers: eventBody.maxUsers
+  });
 
   event.save()
     .then((event) => { res.redirect('/events/event')});
