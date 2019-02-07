@@ -1,5 +1,4 @@
 const Event = require("../models/event.model");
-const User = require("../models/user.model");
 const mongoose = require('mongoose');
 
 module.exports.list = (req, res, next) => {
@@ -38,7 +37,7 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.doCreate = (req, res, next) => {
-  console.log(req.body);
+
   const event = new Event(req.body);
   event.owner = req.user.id;
 
@@ -47,29 +46,27 @@ module.exports.doCreate = (req, res, next) => {
       type: 'Point',
       coordinates: [req.body.latitude, req.body.longitude]
     }
+    if (req.file) {
+    event.picture = req.file.secure_url;
+    }
+    event.save()
+      .then(event => res.redirect("/events"))
+      .catch(error => {
+        if (error instanceof mongoose.Error.ValidationError) {
+          res.render("events/create", {
+            event: req.body,
+            errors: error.errors,
+          });
+        } else {
+          next(error);
+        }
+      });
   } else {
     res.render("events/create", {
       event: req.body,
       errors: {
-        location: 'Need location'
+        location: 'Location is required'
       }
     });
   }
-  
-  if (req.file) {
-    event.picture = req.file.secure_url;
-  }
-
-  event.save()
-    .then(event => res.redirect("/events"))
-    .catch(error => {
-      if (error instanceof mongoose.Error.ValidationError) {
-        res.render("events/create", {
-          event: req.body,
-          errors: error.errors
-        });
-      } else {
-        next(error);
-      }
-    });
-};
+}

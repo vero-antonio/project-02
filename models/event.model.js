@@ -4,15 +4,27 @@ const mongoose = require("mongoose");
 const eventSchema = new mongoose.Schema({
     name: {
         type: String,
-        // required: 'Name is required',
+        required: 'Name is required',
     },
     dateStart: {
         type: Date,
-        // required: 'Date start is required',
+        validate: {
+            validator: function(date) {
+                return date > Date.now();
+            },
+            message: "Date invalid. Please don't select a date in the past!"
+        },
+        required: 'Start date & time is required',
     },
     dateEnd: {
         type: Date,
-        // required: 'Date finish is required'
+        validate: {
+            validator: function(date) {
+                return date > Date.now();
+            },
+            message: "Date invalid. Please don't select a date in the past!"
+        },
+        required: 'End date & time is required',
     },
     location: {
         type: { 
@@ -29,7 +41,8 @@ const eventSchema = new mongoose.Schema({
         default: 'https://res.cloudinary.com/ddby3wqlo/image/upload/v1549447636/event-pics/calendar.jpg'
     },
     description: {
-        type: String
+        type: String,
+        required: 'A description of the group is required'
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
@@ -37,11 +50,12 @@ const eventSchema = new mongoose.Schema({
     },
     interests: {
         type: [String],
-        enum: constants.CATEGORIES.map(({ id }) => id)
+        enum: constants.CATEGORIES.map(({ id }) => id),
+        required: 'At least 1 topic is required'
     },
     maxUsers: {
         type: Number,
-        // required: 'Max number of participants is required'
+        required: 'Max number of participants is required'
     }
 }, {timestamps: true});
 
