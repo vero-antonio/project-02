@@ -11,6 +11,10 @@ function initMap() {
     centerMapOnBrowser();
   }
 
+  // if (document.getElementById("event-list")) {
+  //   console.log(req.body);
+  // }
+
   // if (document.getElementById("create-event")) {
   //   if (window.map.markers.length > 0) {
   //     let lat = window.map.markers[0].position.lat;

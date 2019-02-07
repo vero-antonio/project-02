@@ -5,15 +5,26 @@ const userMiddleware = require('../middlewares/user.middlewares');
 const eventMiddleware = require('../middlewares/event.middlewares');
 const upload = require('../configs/multer.config');
 
-router.get('/event-detail/:id/', eventsController.viewEvent); 
-router.get('/event-list', 
+router.get('/', 
   userMiddleware.isAuthenticated,
-  eventsController.listEvent);
-router.get('/event-create', userMiddleware.isAuthenticated,eventsController.createEvent);
-router.post('/event-create',
+  userMiddleware.haveInterests,
+  eventsController.list);
+
+router.get('/create', 
   userMiddleware.isAuthenticated,
+  userMiddleware.haveInterests, 
+  eventsController.create);
+  
+router.post('/create',
+  userMiddleware.isAuthenticated,
+  userMiddleware.haveInterests, 
   upload.single('picture'),
-  eventsController.doCreateEvent,
+  eventsController.doCreate,
 );
+
+router.get('/:id',
+  userMiddleware.isAuthenticated,
+  userMiddleware.haveInterests,
+  eventsController.details);
 
 module.exports = router;

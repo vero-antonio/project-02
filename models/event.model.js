@@ -15,8 +15,14 @@ const eventSchema = new mongoose.Schema({
         // required: 'Date finish is required'
     },
     location: {
-        type: { type: String }, 
-        coordinates: [Number]
+        type: { 
+            type: String,
+            default: 'Point'
+         }, 
+        coordinates: {
+            type: [Number],
+            required: true
+        }
     },
     picture: {
         type: String,
