@@ -2,7 +2,7 @@
 <div id="map"></div>
 <ul>
   {{#each events as |event| }}
-    <li class="list-item"> {{ event.name }} <a class="ml-3" href="/events/event-detail/{{ event.id }}"><em>See detail</em></a></li>
+    <li class="list-item"> {{ event.name }} <a class="ml-3" href="/events/detail/{{ event.id }}"><em>See detail</em></a></li>
     <li class="list-item"> {{ event.location.coordinates }} </li>
   {{/each }}
 </ul>

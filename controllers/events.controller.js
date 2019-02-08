@@ -70,3 +70,23 @@ module.exports.doCreate = (req, res, next) => {
     });
   }
 }
+
+module.exports.doDelete = (req, res, next) => {
+  Event.findById(req.params.id).then( event => {
+    if ( event.owner.toString() === req.user.id ) {
+
+      Event.findByIdAndRemove(req.params.id)
+        .then(event => {
+          if (!event) {
+            next(createError(404, 'Event not found'));
+          } else {
+            res.redirect('/events');
+          }
+        })
+        .catch(error => next(error));
+
+    } else {
+      next(error);
+    }
+  })
+}
