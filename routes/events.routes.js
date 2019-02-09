@@ -18,13 +18,19 @@ router.get('/create',
 router.post('/create',
   userMiddleware.isAuthenticated,
   userMiddleware.haveInterests, 
+  // eventMiddleware.isValidDate, //ver con Pablo!
   upload.single('picture'),
   eventsController.doCreate,
 );
 
-router.get('/:id',
+router.get('/detail/:id',
   userMiddleware.isAuthenticated,
   userMiddleware.haveInterests,
   eventsController.details);
+
+router.post('/:id/delete',
+  userMiddleware.isAuthenticated,
+  userMiddleware.haveInterests,
+  eventsController.doDelete);
 
 module.exports = router;
