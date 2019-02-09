@@ -75,6 +75,7 @@ module.exports.doDelete = (req, res, next) => {
   Event.findById(req.params.id).then( event => {
     if ( event.owner.toString() === req.user.id ) {
 
+      console.log('entra');
       Event.findByIdAndRemove(req.params.id)
         .then(event => {
           if (!event) {
@@ -89,4 +90,8 @@ module.exports.doDelete = (req, res, next) => {
       next(error);
     }
   })
+}
+
+module.exports.join = (req, res, next) => {
+  res.redirect('/events');
 }
