@@ -7,9 +7,9 @@ function initMap() {
   window.map.init();
   window.map.addSearch("pac-input");
 
-  if (navigator.geolocation) {
-    centerMapOnBrowser();
-  }
+  // if (navigator.geolocation) {
+  //   centerMapOnBrowser();
+  // }
   // if (document.getElementById("event-list")) {
   //   console.log(req.body);
   // }
@@ -35,14 +35,14 @@ function initMap() {
 }
 
 
-function centerMapOnBrowser() {
-  navigator.geolocation.getCurrentPosition((position) => {
-    window.map.googleMap.setCenter({
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    });
-  })   
-}
+// function centerMapOnBrowser() {
+//   navigator.geolocation.getCurrentPosition((position) => {
+//     window.map.googleMap.setCenter({
+//       lat: position.coords.latitude,
+//       lng: position.coords.longitude
+//     });
+//   })   
+// }
 
 $(".card.categories").click(function() {
   const category = this.dataset.category;
