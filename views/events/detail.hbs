@@ -1,12 +1,12 @@
 <h1>Event page!!</h1>
+<div>{{ event.name }}</div>
+<div>{{event.id}}</div>
+<div>{{session.id}}</div>
 
-{{ event.name }}
-{{event.id}}
-
-{{!-- {{#if deleting }} --}}
+{{#isOwner event session}}
 <form action="/events/{{event.id}}/delete" method="post" class="float-right">
   <button type="submit" class="btn btn-danger">
     <i class="fas fa-times"></i>
   </button>
 </form>
-{{!-- {{/if}} --}}
+{{/isOwner}}
