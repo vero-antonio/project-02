@@ -10,9 +10,14 @@
     </button>
   </form>
 {{else}}
-  <form action="/events/{{id}}/join" method="get" class="float-right">
+  <form action="/events/{{id}}/join" method="post" class="float-right">
     <button id="join-button" type="submit" class="btn btn-primary">Join group</button>
   </form>
 {{/isOwner}}
+
+{{#each event.participants as |participant| }}
+{{participant.user.name}}
+{{/each }}
+
 
 

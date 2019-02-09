@@ -33,7 +33,7 @@ router.post('/:id/delete',
   userMiddleware.haveInterests,
   eventsController.doDelete);
 
-router.get('/:id/join',
+router.post('/:id/join',
   userMiddleware.isAuthenticated,
   userMiddleware.haveInterests,
   eventsController.join);

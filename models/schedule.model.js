@@ -5,12 +5,10 @@ const scheduleSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Event'
     },
-    event: {
-        type: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Event'
-        }],
-    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 }, {timestamps: true});
 
 const Schedule = mongoose.model("Schedule", scheduleSchema);

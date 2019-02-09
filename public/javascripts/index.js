@@ -6,21 +6,6 @@ function initMap() {
   window.map = new MyMap(domElement);
   window.map.init();
   window.map.addSearch("pac-input");
-
-  if (navigator.geolocation) {
-    centerMapOnBrowser();
-  }
-
-}
-
-
-function centerMapOnBrowser() {
-  navigator.geolocation.getCurrentPosition((position) => {
-    window.map.googleMap.setCenter({
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    });
-  })   
 }
 
 $(".card.categories").click(function() {
@@ -62,9 +47,14 @@ function getCountryInfo(theName) {
 }
 */
 
-// function getUserJoined() 
+// // function getUserJoined() 
 
-// document.getElementById("join-button").onclick = function(){
-//   const user = session.id;       
-//   getCountryInfo(user);
-// }
+// // document.getElementById("join-button").onclick = function(){
+// //   const user = session.id;       
+// //   getCountryInfo(user);
+// // }
+// function getUserJoined() {
+//   document.getElementById("join-button").onclick = function(){
+//     console.log('entra a getUserJoined');
+//   }
+// } 
