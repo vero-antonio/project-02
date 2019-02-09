@@ -62,9 +62,9 @@ function getCountryInfo(theName) {
 }
 */
 
-function getUserJoined() 
+// function getUserJoined() 
 
-document.getElementById("join-button").onclick = function(){
-  const user = session.id;       
-  getCountryInfo(user);
-}
+// document.getElementById("join-button").onclick = function(){
+//   const user = session.id;       
+//   getCountryInfo(user);
+// }

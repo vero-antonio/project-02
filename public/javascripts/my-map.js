@@ -113,6 +113,10 @@ class MyMap {
     this.bounds.extend(markerBound);
 
     this.markers.push(marker);
+
+    marker.addListener('click', function() {
+      console.log(this.id);
+    });
   }
 
   setMapOnAll(map) {
