@@ -33,4 +33,10 @@ router.post('/:id/delete',
   userMiddleware.haveInterests,
   eventsController.doDelete);
 
+router.post('/:id/join',
+  userMiddleware.isAuthenticated,
+  userMiddleware.haveInterests,
+  eventsController.join);
+
+
 module.exports = router;

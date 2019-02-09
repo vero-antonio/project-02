@@ -6,43 +6,7 @@ function initMap() {
   window.map = new MyMap(domElement);
   window.map.init();
   window.map.addSearch("pac-input");
-
-  // if (navigator.geolocation) {
-  //   centerMapOnBrowser();
-  // }
-  // if (document.getElementById("event-list")) {
-  //   console.log(req.body);
-  // }
-
-  // if (document.getElementById("create-event")) {
-  //   if (window.map.markers.length > 0) {
-  //     let lat = window.map.markers[0].position.lat;
-  //     console.log('hola');
-  //     document.getElementById('latitude').value = lat.toFixed(3);
-  //   //   document.getElementById('longitude').value = lng.toFixed(3);
-
-  //   }
-
-  //   window.map.onClick((event) => {
-  //     if (window.map.markers.length === 0) {
-  //       window.map.addMarker(event.latLng.lat(), event.latLng.lng());
-  //     } else {
-  //       window.map.clearMarkers();
-  //       window.map.addMarker(event.latLng.lat(), event.latLng.lng());
-  //     }
-  //   })
-  // }
 }
-
-
-// function centerMapOnBrowser() {
-//   navigator.geolocation.getCurrentPosition((position) => {
-//     window.map.googleMap.setCenter({
-//       lat: position.coords.latitude,
-//       lng: position.coords.longitude
-//     });
-//   })   
-// }
 
 $(".card.categories").click(function() {
   const category = this.dataset.category;
@@ -63,3 +27,28 @@ $(".card.categories").click(function() {
     $(`#categories-form #category-${category}`).remove();
   }
 })
+
+
+//axios de apuntarse a evento:
+
+/*
+const restCountriesApi = axios.create({
+  baseURL: 'https://restcountries.eu/rest/v2/name/'
+});
+
+function getCountryInfo(theName) {
+  restCountriesApi.get(theName)
+  .then(responseFromAPI => {
+      console.log('Response from API is: ', responseFromAPI.data);           
+})
+.catch(err => {
+  console.log('Error is: ', err);
+  })
+}
+*/
+
+function getUserJoined() {
+  document.getElementById("join-button").onclick = function(){
+    console.log('entra a getUserJoined');
+  }
+} 

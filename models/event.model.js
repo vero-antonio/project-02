@@ -6,6 +6,36 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: 'Name is required',
     },
+    // dateRage: {
+    //     type: {
+    //         start: {
+    //             type: Date,
+    //             validate: {
+    //                 validator: function(date) {
+    //                     return date > Date.now();
+    //                 },
+    //                 message: "Date invalid. Please don't select a date in the past!"
+    //             },
+    //             required: 'Start is required',
+    //         },
+    //         end: {
+    //             type: Date,
+    //             validate: {
+    //                 validator: function(date) {
+    //                     return date > Date.now();
+    //                 },
+    //                 message: "Date invalid. Please don't select a date in the past!"
+    //             },
+    //             required: 'End is required',
+    //         },
+    //     },
+    //     validate: {
+    //         validator: function(dateRage) {
+    //             return dateRage.start < dateRage.end;
+    //         },
+    //         message: "Start date must be after than end date"
+    //     },
+    // },
     dateStart: {
         type: Date,
         validate: {
@@ -57,9 +87,22 @@ const eventSchema = new mongoose.Schema({
         type: Number,
         required: 'Max number of participants is required'
     }
-}, {timestamps: true});
+}, {
+    timestamps: true,
+    toObject: {
+        virtuals: true
+    } 
+});
 
 eventSchema.index({ location: '2dsphere'});
+
+eventSchema.virtual('participants', {
+    ref: 'Schedule',
+    localField: '_id',
+    foreignField: 'event',
+    justOne: false,
+    options: { sort: { createdAt: -1 } }
+});
 
 const Event = mongoose.model("Event", eventSchema);
 module.exports = Event;

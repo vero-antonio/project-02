@@ -4,9 +4,20 @@
 <div>{{session.id}}</div>
 
 {{#isOwner event session}}
-<form action="/events/{{event.id}}/delete" method="post" class="float-right">
-  <button type="submit" class="btn btn-danger">
-    <i class="fas fa-times"></i>
-  </button>
-</form>
+  <form action="/events/{{id}}/delete" method="post" class="float-right">
+    <button type="submit" class="btn btn-danger">
+      <i class="fas fa-times"></i>
+    </button>
+  </form>
+{{else}}
+  <form action="/events/{{id}}/join" method="post" class="float-right">
+    <button id="join-button" type="submit" class="btn btn-primary">Join group</button>
+  </form>
 {{/isOwner}}
+
+{{#each event.participants as |participant| }}
+{{participant.user.name}}
+{{/each }}
+
+
+
