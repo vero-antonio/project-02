@@ -25,7 +25,12 @@ module.exports.list = (req, res, next) => {
   Event.find(criterial)
     .populate('schedule', 'event participants')
     .then(events => {
-      const eventsCoordinates = events.map(event => event.location.coordinates);
+
+      const eventsCoordinates = events.map(event => {
+        return {
+          id: event.id,
+          coordinates: event.location.coordinates
+      } );
       events.forEach(event => {
         if (event.schedule && event.schedule.participants) {
           event.numParticipants = event.schedule.participants.length
@@ -33,6 +38,7 @@ module.exports.list = (req, res, next) => {
           event.numParticipants = 0;
         }
       })
+
       res.render("events/list", 
       { 
         events,

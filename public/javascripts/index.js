@@ -6,21 +6,6 @@ function initMap() {
   window.map = new MyMap(domElement);
   window.map.init();
   window.map.addSearch("pac-input");
-
-  if (navigator.geolocation) {
-    centerMapOnBrowser();
-  }
-
-}
-
-
-function centerMapOnBrowser() {
-  navigator.geolocation.getCurrentPosition((position) => {
-    window.map.googleMap.setCenter({
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    });
-  })   
 }
 
 $(".card.categories").click(function() {
