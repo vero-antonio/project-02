@@ -10,7 +10,6 @@ function initMap() {
   if (navigator.geolocation) {
     centerMapOnBrowser();
   }
-
   // if (document.getElementById("event-list")) {
   //   console.log(req.body);
   // }
