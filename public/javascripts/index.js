@@ -10,6 +10,7 @@ function initMap() {
   if (navigator.geolocation) {
     centerMapOnBrowser();
   }
+
 }
 
 

@@ -9,6 +9,7 @@
 <a class="btn btn-primary mb-3" href="/events/create">New Event</a>
 <a class="btn btn-primary mb-3" href="/">Back</a>
 
-{{!-- <script>
-  addevent({{{events}}})
-</script> --}}
+<script>
+  var decodedJson = decodeURIComponent("{{{eventsCoordinates}}}");
+  window.eventPoints = JSON.parse(decodedJson);
+</script>

@@ -22,7 +22,14 @@ module.exports.list = (req, res, next) => {
   }
 
   Event.find(criterial)
-    .then(events => res.render("events/list", { events }))
+    .then(events => {
+      const eventsCoordinates = events.map(event => event.location.coordinates);
+      res.render("events/list", 
+      { 
+        events,
+        eventsCoordinates: encodeURIComponent(JSON.stringify(eventsCoordinates))
+      }
+    )})
     .catch(err => next(err));
 };
 
