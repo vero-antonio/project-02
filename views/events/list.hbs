@@ -1,7 +1,7 @@
 <h2 id="event-list" class="m-3">List of events:</h2>
 <div class="form-group">
   <label for="name">Search events by name:</label>
-  <input type="text" class="form-control" id="name" name="name">
+  <input type="text" class="form-control" id="name" name="name" value="">
 </div>
 <div class="form-group">
   <label for="location">Search events by location:</label>
@@ -13,7 +13,7 @@
   {{#each events as |event| }}
     <li class="list-item"> {{ event.name }} <a class="ml-3" href="/events/detail/{{ event.id }}"><em>See detail</em></a></li>
     <li class="list-item"> {{ event.location.coordinates }} </li>
-    <li class="list-item"> {{ event.numParticipants }} people will attend</li>
+    <li class="list-item"> {{ event.participants.length }} people will attend</li>
   {{/each }}
 </ul>
 <a class="btn btn-primary mb-3" href="/events/create">New Event</a>
