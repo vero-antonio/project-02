@@ -1,8 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="#">Project 02</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav-content" aria-controls="main-nav-content"
-	 aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark">
+	<img src="/images/nearBy_logo.png" alt="NearBy logo">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-			<a class="nav-link" href="/session/delete">Logout</a>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav ml-auto nav-ul-center">
+			{{#if session}}
+				<li class="nav-item active">
+					<a class="nav-link" href="/events">Search events</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/events/create">Create event</a>
+				</li>
+
+				<li class="nav-item dropdown">
+				  <a class="nav-link" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img class="rounded-circle" src="{{ session.photo }}" alt="profile pic">
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="/session/delete">My events as owner</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="/session/delete">My events as attendant</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Profile</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="/session/delete">Logout</a>
+
+					</div>
+				</li>
+			{{else}}
+				<li class="nav-item active">
+					<form action="/session/facebook" method="post" class="col-4 mx-auto">
+  					<button class="nav-link btn btn-nav-fb active my-2 my-sm-0" type="submit">
+    					<i class="fab fa-facebook"></i>  Login with Facebook
+						</button>
+					</form>
+				</li>
+
+			{{/if}}
+		</ul>
+	</div>
 </nav>
+

@@ -20,7 +20,20 @@ const userSchema = new mongoose.Schema({
         type: [String],
         enum: constants.CATEGORIES.map(({ id }) => id)
     },
-}, {timestamps: true})
+}, {
+    timestamps: true,
+    toObject: {
+        virtuals: true
+    } 
+});
+
+userSchema.virtual('events', {
+    ref: 'Schedule',
+    localField: '_id',
+    foreignField: 'user',
+    justOne: false,
+    options: { sort: { createdAt: -1 } }
+});
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

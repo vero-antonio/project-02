@@ -6,36 +6,38 @@
     <div class="form-group">
       <label for="name">What will your group's name be?</label>
       <input type="text" class="form-control" id="name" name="name" value="{{event.name}}">
-      {{#if errors.name }} <div class="invalid-feedback d-block">{{ errors.name }}</div> {{/if }}
+      {{#if errors.messages.name }} <div class="invalid-feedback d-block">{{ errors.messages.name }}</div> {{/if }}
     </div>
       <div class="form-group">
-      <label for="date-start">Start date & time:</label>
-      <input type="datetime-local" class="form-control" id="date-start" name="dateStart" value="{{event.dateStart}}">
-      {{#if errors.dateStart }} <div class="invalid-feedback d-block">{{ errors.dateStart }}</div> {{/if }}
+      <label for="start">Start date & time:</label>
+      <input type="datetime-local" class="form-control" id="start" name="start" value="{{event.dateRange.start}}">
+      {{#if errors.messages.dateRange.start }} <div class="invalid-feedback d-block">{{ errors.messages.dateRange.start }}</div> {{/if }}
     </div>
     <div class="form-group">
-      <label for="date-end">End date & time:</label>
-      <input type="datetime-local" class="form-control" id="date-end" name="dateEnd" value="{{event.dateEnd}}">
-      {{#if errors.dateEnd }} <div class="invalid-feedback d-block">{{ errors.dateEnd }}</div> {{/if }}
+      <label for="end">End date & time:</label>
+      <input type="datetime-local" class="form-control" id="end" name="end" value="{{event.dateRange.end}}">
+      {{#if errors.messages.dateRange.end }} <div class="invalid-feedback d-block">{{ errors.messages.dateRange.end }}</div> {{/if }}
     </div>
     <div class="form-group">
       <label for="description">What your group will do?</label>
       <textarea class="form-control" id="description" name="description" value="{{event.description}}"></textarea>
-      {{#if errors.description }} <div class="invalid-feedback d-block">{{ errors.description }}</div> {{/if }}
+      {{#if errors.messages.description }} <div class="invalid-feedback d-block">{{ errors.messages.description }}</div> {{/if }}
     </div>
     <div class="form-group">
       <label for="max-users">How many people can go to the event?</label>
       <input type="number" class="form-control" id="max-users" name="maxUsers" value="{{event.maxUsers}}">
-      {{#if errors.maxUsers }} <div class="invalid-feedback d-block">{{ errors.maxUsers }}</div> {{/if }}
+      {{#if errors.messages.maxUsers }} <div class="invalid-feedback d-block">{{ errors.messages.maxUsers }}</div> {{/if }}
     </div>
     <div class="form-group">
       <label for="pic">Add a picture:</label>
       <input type="file" class="form-control" id="pic" name="picture">
+      {{!-- <input type="file" name="picture" id="pic" class="inputfile" />
+      <label for="picture">Add a picture</label> --}}
     </div>
 
     <div class="form-group">
-      <label for="direction">What's your new group's hometown? Write the location:</label>
-      <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+      <label for="direction">What's your new group's hometown?</label>
+      <input id="pac-input" class="form-control" type="text" placeholder="Add the location">
       {{#if errors.location }} <div class="invalid-feedback d-block">{{ errors.location }}</div> {{/if }}
       <div id="map"></div>
     </div>

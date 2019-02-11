@@ -7,13 +7,9 @@ class MyMap {
   }
 
   init() {
-    const sol = {
-      lat: 40.416732,
-      lng: -3.703636
-    }
     this.googleMap = new google.maps.Map(this.containerDomElement, {
       zoom: 16,
-      center: sol,
+      center: { lat: 40.416732, lng: -3.703636 },
       styles: [
         {
           "elementType": "geometry",
@@ -217,25 +213,8 @@ class MyMap {
 
     this.markers.push(marker);
 
-    // marker.addListener('mouseover', function(){
-    //   window.map.addInfoWindow();
-    // })
   }
 
-  // addInfoWindow(){
-  //     const infoWindow = new google.maps.InfoWindow({
-  //       content: '<div id="content">'+
-  //       '<div id="siteNotice">'+
-  //       '</div>'+
-  //       `<h1 id="firstHeading" class="firstHeading">${public.name}</h1>`+
-  //       '<div id="bodyContent">'+
-  //       `<p>${public.description}</p>`+
-  //       '</div>'+
-  //       '</div>',
-  //       maxWidth: 200
-  //     });
-  //     infoWindow.open(map, marker);
-  // }
 
   setMapOnAll(map) {
     for (let i = 0; i < this.markers.length; i++) {

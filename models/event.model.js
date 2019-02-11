@@ -6,56 +6,56 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: 'Name is required',
     },
-    // dateRage: {
-    //     type: {
-    //         start: {
-    //             type: Date,
-    //             validate: {
-    //                 validator: function(date) {
-    //                     return date > Date.now();
-    //                 },
-    //                 message: "Date invalid. Please don't select a date in the past!"
-    //             },
-    //             required: 'Start is required',
-    //         },
-    //         end: {
-    //             type: Date,
-    //             validate: {
-    //                 validator: function(date) {
-    //                     return date > Date.now();
-    //                 },
-    //                 message: "Date invalid. Please don't select a date in the past!"
-    //             },
-    //             required: 'End is required',
-    //         },
-    //     },
+    dateRange: {
+        type: {
+            start: {
+                type: Date,
+                validate: {
+                    validator: function(date) {
+                        return date > Date.now();
+                    },
+                    message: "Date invalid. Please don't select a date in the past!"
+                },
+                required: 'Start is required',
+            },
+            end: {
+                type: Date,
+                validate: {
+                    validator: function(date) {
+                        return date > Date.now();
+                    },
+                    message: "Date invalid. Please don't select a date in the past!"
+                },
+                required: 'End is required',
+            },
+        },
+        validate: {
+            validator: function(dateRage) {
+                return dateRage.start < dateRage.end;
+            },
+            message: "Start date must be after than end date"
+        },
+    },
+    // dateStart: {
+    //     type: Date,
     //     validate: {
-    //         validator: function(dateRage) {
-    //             return dateRage.start < dateRage.end;
+    //         validator: function(date) {
+    //             return date > Date.now();
     //         },
-    //         message: "Start date must be after than end date"
+    //         message: "Date invalid. Please don't select a date in the past!"
     //     },
+    //     required: 'Start date & time is required',
     // },
-    dateStart: {
-        type: Date,
-        validate: {
-            validator: function(date) {
-                return date > Date.now();
-            },
-            message: "Date invalid. Please don't select a date in the past!"
-        },
-        required: 'Start date & time is required',
-    },
-    dateEnd: {
-        type: Date,
-        validate: {
-            validator: function(date) {
-                return date > Date.now();
-            },
-            message: "Date invalid. Please don't select a date in the past!"
-        },
-        required: 'End date & time is required',
-    },
+    // dateEnd: {
+    //     type: Date,
+    //     validate: {
+    //         validator: function(date) {
+    //             return date > Date.now();
+    //         },
+    //         message: "Date invalid. Please don't select a date in the past!"
+    //     },
+    //     required: 'End date & time is required',
+    // },
     location: {
         type: { 
             type: String,
