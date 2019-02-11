@@ -7,6 +7,7 @@ const eventSchema = new mongoose.Schema({
         required: 'Name is required',
     },
     dateRange: {
+        required: 'Dates are required',
         type: {
             start: {
                 type: Date,
@@ -30,10 +31,11 @@ const eventSchema = new mongoose.Schema({
             },
         },
         validate: {
-            validator: function(dateRage) {
-                return dateRage.start < dateRage.end;
+            validator: function(dateRange) {
+                console.log({ dateRange });
+                return new Date(dateRange.start).getTime() < new Date(dateRange.end).getTime() && new Date(dateRange.start).getTime() > Date.now();
             },
-            message: "Start date must be after than end date"
+            message: "Start date must be earlier than end date and later than now"
         },
     },
     // dateStart: {

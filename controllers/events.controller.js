@@ -23,9 +23,9 @@ module.exports.list = (req, res, next) => {
   }
 
   Event.find(criterial)
-    .populate({ path: 'events', populate: { path: 'event' }})
+    .populate({ path: 'participants', populate: { path: 'user' }})
     .then(events => {
-
+      console.log(events);
       const eventsCoordinates = events.map(event => {
         return {
           id: event.id,
@@ -71,37 +71,55 @@ const ifCoordsExist = ({ longitude, latitude }, event) => (
     })
 ) 
 
-// const ifDatesExist = ({ start, end }, event) => (
-//   (start && end) &&
-//     (event.dateRange = {
-//       start: start,
-//       end: end
-//     })
-// ) 
+const ifDatesExist = ({ start, end }, event) => (
+  (start && end) &&
+    (event.dateRange = {
+      start: start,
+      end: end
+    })
+) 
 
 const ifInterestsExist = ({ interests }, event) => (interests) && (event.interests = interests)
 const ifFileExists = ({ file }, event) => file && (event.picture = file.secure_url)
 
 module.exports.doCreate = (req, res, next) => {
+  console.log('req.body', req.body);
 
   const event = new Event(req.body);
   event.owner = req.user.id;
 
+  // const hasError = ifCoordsExist(req.body, event) && ifFileExists(req, event) && ifInterestsExist(req.body, event);
+
   ifCoordsExist(req.body, event)
-  //ifDatesExist(req.body, event)
+  ifDatesExist(req.body, event)
   ifFileExists(req, event)
   ifInterestsExist(req.body, event)
+
+  console.log({ event });
+
+  // if (hasError) {
+
+  // } else {
+
+  // }
 
   event.save()
     .then(() => res.redirect("/events"))
     .catch(error => {
       if (error instanceof mongoose.Error.ValidationError) {
+        console.log({ error });
+        console.log(error.errors.dateRange.message);
         res.render("events/create", {
           event: req.body,
+          ...(req.body.longitude && req.body.latitude
+            ? { eventCoordinates: encodeURIComponent(JSON.stringify(event.location.coordinates))}
+            : null
+          ),
           errors: {
             messages: error.errors,
-            location: 'Location is required',
-            interests: 'At least 1 topic is required'
+            ...(error.errors.dateRange ? { date: error.errors.dateRange.message } : null),
+            ...(!ifCoordsExist(req.body, event) ? { location: 'Location is required' } : null),
+            ...(!ifInterestsExist(req.body, event) ? { interests: 'At least 1 topic is required' } : null),
           } 
         });
       } else {

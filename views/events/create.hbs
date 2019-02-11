@@ -10,17 +10,17 @@
     </div>
       <div class="form-group">
       <label for="start">Start date & time:</label>
-      <input type="datetime-local" class="form-control" id="start" name="start" value="{{event.dateRange.start}}">
-      {{#if errors.messages.dateRange.start }} <div class="invalid-feedback d-block">{{ errors.messages.dateRange.start }}</div> {{/if }}
+      <input type="datetime-local" class="form-control" id="start" name="start" value="{{event.start}}">
+      {{#if errors.date }} <div class="invalid-feedback d-block">{{ errors.date }}</div> {{/if }}
     </div>
     <div class="form-group">
       <label for="end">End date & time:</label>
-      <input type="datetime-local" class="form-control" id="end" name="end" value="{{event.dateRange.end}}">
-      {{#if errors.messages.dateRange.end }} <div class="invalid-feedback d-block">{{ errors.messages.dateRange.end }}</div> {{/if }}
+      <input type="datetime-local" class="form-control" id="end" name="end" value="{{event.end}}">
+      {{#if errors.date }} <div class="invalid-feedback d-block">{{ errors.date }}</div> {{/if }}
     </div>
     <div class="form-group">
       <label for="description">What your group will do?</label>
-      <textarea class="form-control" id="description" name="description" value="{{event.description}}"></textarea>
+      <textarea class="form-control" id="description" name="description">{{event.description}}</textarea>
       {{#if errors.messages.description }} <div class="invalid-feedback d-block">{{ errors.messages.description }}</div> {{/if }}
     </div>
     <div class="form-group">
@@ -42,8 +42,8 @@
       <div id="map"></div>
     </div>
   
-    <input type="text" id="longitude" class="hidden" name="longitude"/>
-    <input type="text" id="latitude" class="hidden" name="latitude"/>
+    <input type="text" value="{{event.longitude}}" id="longitude" class="hidden" name="longitude"/>
+    <input type="text" value="{{event.latitude}}" id="latitude" class="hidden" name="latitude"/>
 
     <div class="form-group">
       <label for="direction">What will your event be about? Select 1 or more topics:</label>
@@ -54,6 +54,15 @@
 
     <button type="submit" class="btn btn-primary">Done!</button>
   </form>
+  
+  {{#if event.longitude}}
+    {{#if event.latitude}}
+    <script>
+      var decodedJson = decodeURIComponent("{{{eventCoordinates}}}");
+      window.eventPoint = JSON.parse(decodedJson);
+    </script>
+    {{/if}}
+  {{/if}}
 
 
 </section>

@@ -1,4 +1,4 @@
-<h1>Event page!!</h1>
+{{!-- <h1>Event page!!</h1>
 <div>{{ event.name }}</div>
 <div>{{event.id}}</div>
 <div>{{session.id}}</div>
@@ -17,7 +17,73 @@
 
 {{#each event.participants as |participant| }}
 {{participant.user.name}}
+{{/each }} --}}
+
+
+
+<h5>{{ event.dateStart}}</h5>
+<h1 id="event-name">{{ event.name }}</h1>
+
+{{!-- <div>{{event.id}}</div>
+<div>{{session.id}}</div> --}}
+
+
+<div class="container">
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+ <div class="carousel-inner">
+   <div class="carousel-item active">
+       <img src="/public/images/art.JPG" class="d-block w-100">
+   </div>
+ </div>
+</div>
+<h3>Details:</h3>
+<p>{{event.description}}</p>
+
+{{!-- need to add users info to the cards bellow --}}
+{{!-- <h3 id="attendees">Attendees:</h3>
+<div class="card-deck">
+ <div class="card">
+   <img src="..." class="card-img-top" alt="...">
+   <div class="card-body">
+     <h5 class="card-title">Card title</h5>
+   </div>
+ </div>
+ <div class="card">
+   <img src="..." class="card-img-top" alt="...">
+   <div class="card-body">
+     <h5 class="card-title">Card title</h5>
+   </div>
+ </div>
+ <div class="card">
+   <img src="..." class="card-img-top" alt="...">
+   <div class="card-body">
+     <h5 class="card-title">Card title</h5>
+   </div>
+ </div>
+</div> --}}
+
+{{#isOwner event session}}
+ <form action="/events/{{id}}/delete" method="post" class="center">
+   <button type="submit" class="btn btn-danger">
+     <i class="fas fa-times"></i>
+     Delete Event
+   </button>
+ </form>
+{{else}}
+ <form action="/events/{{id}}/join" method="post" class="center">
+   <button id="join-button" type="submit" class="btn btn-primary">Join group!</button>
+ </form>
+
+{{/isOwner}}
+
+<h3 id="attendees">Attendees:</h3>
+<div class="card-deck">
+
+{{#each event.participants as |participant| }}
+  <div class="card">
+    <img src="{{participant.user.photo}}" class="card-img-top" alt="profile photo">
+    <div class="card-body">
+      <h5 class="card-title">{{participant.user.name}}</h5>
+  </div>
 {{/each }}
-
-
 

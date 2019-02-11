@@ -79,3 +79,33 @@ a {
 .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
 }
+
+
+/* estilos del botón para añadir foto: */
+
+#event-name{
+  padding-top: 40px;
+  text-align: center;
+}
+
+.container{
+  text-align: center;
+}
+
+#attendees{
+  padding-top: 40px;
+}
+
+.card{
+  background: #fff;
+  background-clip: padding-box;
+  background-size: cover;
+  border: 1px solid rgba(46,62,72,.12);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.center{
+  padding-top: 60px;
+}

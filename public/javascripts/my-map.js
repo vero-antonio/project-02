@@ -192,6 +192,10 @@ class MyMap {
     if (window.eventPoints && window.eventPoints.length > 0) {
       this.showAllMarkers();
     }
+
+    if (window.eventPoint) {
+      this.addMarker(window.eventPoint[0], window.eventPoint[1]);
+    }
   }
 
   addMarker(lat, lng, id) {
@@ -204,9 +208,12 @@ class MyMap {
       zoom: 12 ,
     });
 
-    marker.addListener('click', function() {
-      window.location = `/events/detail/${id}`;
-    });
+    if (id) {
+      marker.addListener('click', function() {
+        window.location = `/events/detail/${id}`;
+      });
+    }
+
 
     var markerBound = new google.maps.LatLng(lat, lng);
     this.bounds.extend(markerBound);
@@ -214,9 +221,9 @@ class MyMap {
     this.markers.push(marker);
 
 
-    marker.addListener('click', function() {
-      console.log(this.id);
-    });
+    // marker.addListener('click', function() {
+    //   console.log(this.id);
+    // });
 
     // marker.addListener('mouseover', function(){
     //   window.map.addInfoWindow();
