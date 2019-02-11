@@ -18,7 +18,7 @@ module.exports.doLogin = (req, res, next) => {
           if (error){ 
             next(error);
           } else {
-            res.redirect('/home');
+            res.redirect('/events');
           }
         });
       } 

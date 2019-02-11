@@ -23,7 +23,7 @@ module.exports.list = (req, res, next) => {
   }
 
   Event.find(criterial)
-    .populate('schedule', 'event participants')
+    .populate({ path: 'events', populate: { path: 'event' }})
     .then(events => {
 
       const eventsCoordinates = events.map(event => {
@@ -53,7 +53,6 @@ module.exports.details = (req, res, next) => {
   Event.findById(req.params.id)
     .populate({ path: 'participants', populate: { path: 'user' }})
     .then(event => {
-      console.log(event);
       res.render("events/detail", { event })
     })
     .catch(err => next(err));
@@ -63,39 +62,52 @@ module.exports.create = (req, res, next) => {
   res.render("events/create");
 };
 
+
+const ifCoordsExist = ({ longitude, latitude }, event) => (
+  (longitude && latitude) &&
+    (event.location = {
+      type: 'Point',
+      coordinates: [latitude, longitude]
+    })
+) 
+
+// const ifDatesExist = ({ start, end }, event) => (
+//   (start && end) &&
+//     (event.dateRange = {
+//       start: start,
+//       end: end
+//     })
+// ) 
+
+const ifInterestsExist = ({ interests }, event) => (interests) && (event.interests = interests)
+const ifFileExists = ({ file }, event) => file && (event.picture = file.secure_url)
+
 module.exports.doCreate = (req, res, next) => {
 
   const event = new Event(req.body);
   event.owner = req.user.id;
 
-  if (req.body.longitude.length > 0 && req.body.latitude.length > 0) {
-    event.location = {
-      type: 'Point',
-      coordinates: [req.body.latitude, req.body.longitude]
-    }
-    if (req.file) {
-    event.picture = req.file.secure_url;
-    }
-    event.save()
-      .then(event => res.redirect("/events"))
-      .catch(error => {
-        if (error instanceof mongoose.Error.ValidationError) {
-          res.render("events/create", {
-            event: req.body,
-            errors: error.errors,
-          });
-        } else {
-          next(error);
-        }
-      });
-  } else {
-    res.render("events/create", {
-      event: req.body,
-      errors: {
-        location: 'Location is required'
+  ifCoordsExist(req.body, event)
+  //ifDatesExist(req.body, event)
+  ifFileExists(req, event)
+  ifInterestsExist(req.body, event)
+
+  event.save()
+    .then(() => res.redirect("/events"))
+    .catch(error => {
+      if (error instanceof mongoose.Error.ValidationError) {
+        res.render("events/create", {
+          event: req.body,
+          errors: {
+            messages: error.errors,
+            location: 'Location is required',
+            interests: 'At least 1 topic is required'
+          } 
+        });
+      } else {
+        next(error);
       }
     });
-  }
 }
 
 module.exports.doDelete = (req, res, next) => {

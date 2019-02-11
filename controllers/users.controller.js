@@ -17,6 +17,6 @@ module.exports.updateCategories = (req, res, next) => {
 }
 
 module.exports.home = (req, res, next) => {
-  res.render('users/home');
+  res.render('/events');
 }
 
