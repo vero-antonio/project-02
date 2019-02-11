@@ -30,7 +30,8 @@ module.exports.list = (req, res, next) => {
         return {
           id: event.id,
           coordinates: event.location.coordinates
-      } );
+        }
+      });
       events.forEach(event => {
         if (event.schedule && event.schedule.participants) {
           event.numParticipants = event.schedule.participants.length
