@@ -47,8 +47,14 @@ function getCountryInfo(theName) {
 }
 */
 
-function getUserJoined() {
-  document.getElementById("join-button").onclick = function(){
-    console.log('entra a getUserJoined');
-  }
-} 
+// // function getUserJoined() 
+
+// // document.getElementById("join-button").onclick = function(){
+// //   const user = session.id;       
+// //   getCountryInfo(user);
+// // }
+// function getUserJoined() {
+//   document.getElementById("join-button").onclick = function(){
+//     console.log('entra a getUserJoined');
+//   }
+// } 
