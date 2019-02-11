@@ -213,6 +213,15 @@ class MyMap {
 
     this.markers.push(marker);
 
+
+    marker.addListener('click', function() {
+      console.log(this.id);
+    });
+
+    // marker.addListener('mouseover', function(){
+    //   window.map.addInfoWindow();
+    // })
+
   }
 
 
