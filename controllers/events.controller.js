@@ -5,11 +5,19 @@ const mongoose = require('mongoose');
 module.exports.list = (req, res, next) => {
   const { name, lat, lng } = req.query;
   const criterial = {};
+  console.log(req.user.interests);
 
+  //filter by user interests:
+  criteria = {
+    interests: { $in: req.user.interests }
+  }
+
+  //filter by user interests:
   if (name) {
     criterial.name = new RegExp(name, "i");
   }
 
+  //filter by location:
   if (lat && lng) {
     criterial.location = {
       $near: {
@@ -21,15 +29,16 @@ module.exports.list = (req, res, next) => {
       }
     };
   }
-
-  Event.find(criterial)
+  
+  Event.find(criteria)
     .populate({ path: 'participants', populate: { path: 'user' }})
     .then(events => {
-      console.log(events);
+      // console.log(events);
       const eventsCoordinates = events.map(event => {
         return {
           id: event.id,
-          coordinates: event.location.coordinates
+          coordinates: event.location.coordinates,
+          interests: event.interests
         }
       });
       events.forEach(event => {
@@ -43,7 +52,7 @@ module.exports.list = (req, res, next) => {
       res.render("events/list", 
       { 
         events,
-        eventsCoordinates: encodeURIComponent(JSON.stringify(eventsCoordinates))
+        eventsCoordinates: encodeURIComponent(JSON.stringify(eventsCoordinates)),
       }
     )})
     .catch(err => next(err));
@@ -88,20 +97,10 @@ module.exports.doCreate = (req, res, next) => {
   const event = new Event(req.body);
   event.owner = req.user.id;
 
-  // const hasError = ifCoordsExist(req.body, event) && ifFileExists(req, event) && ifInterestsExist(req.body, event);
-
   ifCoordsExist(req.body, event)
   ifDatesExist(req.body, event)
   ifFileExists(req, event)
   ifInterestsExist(req.body, event)
-
-  console.log({ event });
-
-  // if (hasError) {
-
-  // } else {
-
-  // }
 
   event.save()
     .then(() => res.redirect("/events"))
@@ -161,3 +160,4 @@ module.exports.join = (req, res, next) => {
     }
   }).catch(error => next(error));
 }
+
