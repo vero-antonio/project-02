@@ -65,6 +65,9 @@ const eventSchema = new mongoose.Schema({
         enum: constants.CATEGORIES.map(({ id }) => id),
         required: 'At least 1 topic is required'
     },
+    direction: {
+        type: String
+    },
     maxUsers: {
         type: Number,
         required: 'Max number of participants is required'

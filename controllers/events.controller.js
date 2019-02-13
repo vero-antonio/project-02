@@ -161,15 +161,12 @@ module.exports.join = (req, res, next) => {
           
           let reminder = '';
           const reminderData = {
-            // start: [2019, 5, 30, 6, 30],
             start: dateStartArray,
-            // duration: { hours: 6, minutes: 30 },
             end: dateEndArray,
             title: event.name,
             description: event.description,
-            location: 'Folsom Field, University of Colorado (finish line)',
-            geo: { lat: 40.0095, lon: 105.2669 },
-            //geo: { lat: event.location.coordinates[0], lon: event.location.coordinates[1] },
+            location: event.direction,
+            geo: { lat: event.location.coordinates[0], lon: event.location.coordinates[1] },
             categories: event.interests,
           }
 

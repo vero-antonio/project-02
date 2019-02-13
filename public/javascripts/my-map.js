@@ -195,6 +195,7 @@ class MyMap {
 
     if (window.eventPoint) {
       this.addMarker(window.eventPoint[0], window.eventPoint[1]);
+      this.googleMap.setCenter(new google.maps.LatLng(window.eventPoint[0], window.eventPoint[1]), 10);
     }
   }
 
