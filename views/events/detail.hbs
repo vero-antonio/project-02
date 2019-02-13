@@ -66,7 +66,7 @@
 
 
 
-<h5>{{ event.dateStart}}</h5>
+<h5>{{ event.dateRange.start}}</h5>
 <h1 id="event-name">{{ event.name }}</h1>
 
 {{!-- <div>{{event.id}}</div>
@@ -77,7 +77,7 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
  <div class="carousel-inner">
    <div class="carousel-item active">
-       <img src="/public/images/art.JPG" class="d-block w-100">
+       <img src="{{event.picture}}" class="d-block w-100">
    </div>
  </div>
 </div>
@@ -122,13 +122,25 @@
 {{/isOwner}}
 
 <h3 id="attendees">Attendees:</h3>
-<div class="card-deck">
+{{!-- <div class="card-deck"> --}}
 
-{{#each event.participants as |participant| }}
+{{!-- {{#each event.participants as |participant| }}
   <div class="card">
     <img src="{{participant.user.photo}}" class="card-img-top" alt="profile photo">
     <div class="card-body">
       <h5 class="card-title">{{participant.user.name}}</h5>
   </div>
-{{/each }}
+{{/each }} --}}
 
+<div class="row">
+  {{#each event.participants as |participant|}}
+      <div class="col-4 mb-2 mt-2" style="display: flex; justify-content: center">
+          <div class="card categories" style="width: 18rem;" data-category='{{participant.user.id}}'>
+              <img src="{{participant.user.photo}}" class="card-img-top" alt="{{participant.user.id}}">
+              <div class="card-body">
+                  <p class="card-text" style="text-align: center">{{participant.user.name}}</p>
+              </div>
+          </div>
+      </div>
+  {{/each}}
+</div>

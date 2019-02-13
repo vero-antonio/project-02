@@ -27,34 +27,3 @@ $(".card.categories").click(function() {
     $(`#categories-form #category-${category}`).remove();
   }
 })
-
-
-//axios de apuntarse a evento:
-
-/*
-const restCountriesApi = axios.create({
-  baseURL: 'https://restcountries.eu/rest/v2/name/'
-});
-
-function getCountryInfo(theName) {
-  restCountriesApi.get(theName)
-  .then(responseFromAPI => {
-      console.log('Response from API is: ', responseFromAPI.data);           
-})
-.catch(err => {
-  console.log('Error is: ', err);
-  })
-}
-*/
-
-// // function getUserJoined() 
-
-// // document.getElementById("join-button").onclick = function(){
-// //   const user = session.id;       
-// //   getCountryInfo(user);
-// // }
-// function getUserJoined() {
-//   document.getElementById("join-button").onclick = function(){
-//     console.log('entra a getUserJoined');
-//   }
-// } 
