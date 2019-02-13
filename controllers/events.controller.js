@@ -1,13 +1,12 @@
 const Event = require("../models/event.model");
 const Schedule = require("../models/schedule.model");
 const mongoose = require('mongoose');
-const transporter = require('../configs/nodemailer.config'); //nuevo código para envío correo
-
+const transporter = require('../configs/nodemailer.config'); 
+const ics = require('ics'); 
 
 module.exports.list = (req, res, next) => {
   const { name, lat, lng } = req.query;
   const criterial = {};
-  console.log(req.user.interests);
 
   //filter by user interests:
   criteria = {
@@ -94,7 +93,6 @@ const ifInterestsExist = ({ interests }, event) => (interests) && (event.interes
 const ifFileExists = ({ file }, event) => file && (event.picture = file.secure_url)
 
 module.exports.doCreate = (req, res, next) => {
-  console.log('req.body', req.body);
 
   const event = new Event(req.body);
   event.owner = req.user.id;
@@ -108,8 +106,6 @@ module.exports.doCreate = (req, res, next) => {
     .then(() => res.redirect("/events"))
     .catch(error => {
       if (error instanceof mongoose.Error.ValidationError) {
-        console.log({ error });
-        console.log(error.errors.dateRange.message);
         res.render("events/create", {
           event: req.body,
           ...(req.body.longitude && req.body.latitude
@@ -157,14 +153,46 @@ module.exports.join = (req, res, next) => {
       })
       return schedule.save()
         .then(schedule => {
-          console.log(req.user.email, event.name);
+          
+          const start = event.dateRange.start;
+          const dateStartArray = [Number(start.substring(0,4)),Number(start.substring(5,7)),Number(start.substring(8,10)),Number(start.substring(11,13)),Number(start.substring(14,16))];
+          const end = event.dateRange.end;
+          const dateEndArray = [Number(end.substring(0,4)),Number(end.substring(5,7)),Number(end.substring(8,10)),Number(end.substring(11,13)),Number(end.substring(14,16))];
+          
+          let reminder = '';
+          const reminderData = {
+            // start: [2019, 5, 30, 6, 30],
+            start: dateStartArray,
+            // duration: { hours: 6, minutes: 30 },
+            end: dateEndArray,
+            title: event.name,
+            description: event.description,
+            location: 'Folsom Field, University of Colorado (finish line)',
+            geo: { lat: 40.0095, lon: 105.2669 },
+            //geo: { lat: event.location.coordinates[0], lon: event.location.coordinates[1] },
+            categories: event.interests,
+          }
+
+          ics.createEvent(reminderData, (error, value) => {
+            if (error) {
+              console.log(error)
+              return
+            }
+            reminder = value;
+          });
+
           transporter.sendMail({
             from: '"NearBy" <veronica.celemin@gmail.com>',
-            to: req.user.email,
-            // to: 'veronica.celemin@gmail.com',
+            // to: req.user.email,
+            to: 'veronica.celemin@gmail.com',
             subject: `Asistirás a: ${event.name}`,
-            text: `Te acabas de inscribir al evento: ${event.name}! añádelo a tu calendario pinchando en este enlace:`,
-            //html: 'www.elpais.com'//`/users/${user.token}`
+            text: `Te acabas de inscribir al evento: ${event.name}! añádelo a tu calendario con el fichero adjunto.`,
+            html: `/events/detail/${req.params.id}`,
+            icalEvent: {
+              filename: 'eventReminder.ics',
+              method: 'request',
+              content: reminder
+            }
           })
 
           res.redirect(`/events/detail/${req.params.id}`)
