@@ -38,26 +38,6 @@ const eventSchema = new mongoose.Schema({
             message: "Start date must be earlier than end date and later than now"
         },
     },
-    // dateStart: {
-    //     type: Date,
-    //     validate: {
-    //         validator: function(date) {
-    //             return date > Date.now();
-    //         },
-    //         message: "Date invalid. Please don't select a date in the past!"
-    //     },
-    //     required: 'Start date & time is required',
-    // },
-    // dateEnd: {
-    //     type: Date,
-    //     validate: {
-    //         validator: function(date) {
-    //             return date > Date.now();
-    //         },
-    //         message: "Date invalid. Please don't select a date in the past!"
-    //     },
-    //     required: 'End date & time is required',
-    // },
     location: {
         type: { 
             type: String,
@@ -84,6 +64,9 @@ const eventSchema = new mongoose.Schema({
         type: [String],
         enum: constants.CATEGORIES.map(({ id }) => id),
         required: 'At least 1 topic is required'
+    },
+    direction: {
+        type: String
     },
     maxUsers: {
         type: Number,

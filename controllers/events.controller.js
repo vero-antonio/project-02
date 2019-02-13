@@ -1,15 +1,24 @@
 const Event = require("../models/event.model");
 const Schedule = require("../models/schedule.model");
 const mongoose = require('mongoose');
+const transporter = require('../configs/nodemailer.config'); 
+const ics = require('ics'); 
 
 module.exports.list = (req, res, next) => {
   const { name, lat, lng } = req.query;
   const criterial = {};
 
+  //filter by user interests:
+  criteria = {
+    interests: { $in: req.user.interests }
+  }
+
+  //filter by user interests:
   if (name) {
     criterial.name = new RegExp(name, "i");
   }
 
+  //filter by location:
   if (lat && lng) {
     criterial.location = {
       $near: {
@@ -21,15 +30,16 @@ module.exports.list = (req, res, next) => {
       }
     };
   }
-
-  Event.find(criterial)
+  
+  Event.find(criteria)
     .populate({ path: 'participants', populate: { path: 'user' }})
     .then(events => {
-      console.log(events);
+      // console.log(events);
       const eventsCoordinates = events.map(event => {
         return {
           id: event.id,
-          coordinates: event.location.coordinates
+          coordinates: event.location.coordinates,
+          interests: event.interests
         }
       });
       events.forEach(event => {
@@ -43,7 +53,7 @@ module.exports.list = (req, res, next) => {
       res.render("events/list", 
       { 
         events,
-        eventsCoordinates: encodeURIComponent(JSON.stringify(eventsCoordinates))
+        eventsCoordinates: encodeURIComponent(JSON.stringify(eventsCoordinates)),
       }
     )})
     .catch(err => next(err));
@@ -83,32 +93,19 @@ const ifInterestsExist = ({ interests }, event) => (interests) && (event.interes
 const ifFileExists = ({ file }, event) => file && (event.picture = file.secure_url)
 
 module.exports.doCreate = (req, res, next) => {
-  console.log('req.body', req.body);
 
   const event = new Event(req.body);
   event.owner = req.user.id;
-
-  // const hasError = ifCoordsExist(req.body, event) && ifFileExists(req, event) && ifInterestsExist(req.body, event);
 
   ifCoordsExist(req.body, event)
   ifDatesExist(req.body, event)
   ifFileExists(req, event)
   ifInterestsExist(req.body, event)
 
-  console.log({ event });
-
-  // if (hasError) {
-
-  // } else {
-
-  // }
-
   event.save()
     .then(() => res.redirect("/events"))
     .catch(error => {
       if (error instanceof mongoose.Error.ValidationError) {
-        console.log({ error });
-        console.log(error.errors.dateRange.message);
         res.render("events/create", {
           event: req.body,
           ...(req.body.longitude && req.body.latitude
@@ -156,8 +153,49 @@ module.exports.join = (req, res, next) => {
       })
       return schedule.save()
         .then(schedule => {
+          
+          const start = event.dateRange.start;
+          const dateStartArray = [Number(start.substring(0,4)),Number(start.substring(5,7)),Number(start.substring(8,10)),Number(start.substring(11,13)),Number(start.substring(14,16))];
+          const end = event.dateRange.end;
+          const dateEndArray = [Number(end.substring(0,4)),Number(end.substring(5,7)),Number(end.substring(8,10)),Number(end.substring(11,13)),Number(end.substring(14,16))];
+          
+          let reminder = '';
+          const reminderData = {
+            start: dateStartArray,
+            end: dateEndArray,
+            title: event.name,
+            description: event.description,
+            location: event.direction,
+            geo: { lat: event.location.coordinates[0], lon: event.location.coordinates[1] },
+            categories: event.interests,
+          }
+
+          ics.createEvent(reminderData, (error, value) => {
+            if (error) {
+              console.log(error)
+              return
+            }
+            reminder = value;
+          });
+
+          transporter.sendMail({
+            from: '"NearBy" <veronica.celemin@gmail.com>',
+            // to: req.user.email,
+            to: 'veronica.celemin@gmail.com',
+            subject: `Asistirás a: ${event.name}`,
+            text: `Te acabas de inscribir al evento: ${event.name}! añádelo a tu calendario con el fichero adjunto.`,
+            html: `/events/detail/${req.params.id}`,
+            icalEvent: {
+              filename: 'eventReminder.ics',
+              method: 'request',
+              content: reminder
+            }
+          })
+
           res.redirect(`/events/detail/${req.params.id}`)
         })
     }
   }).catch(error => next(error));
 }
+
+
