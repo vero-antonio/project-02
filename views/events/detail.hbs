@@ -2,7 +2,6 @@
 <div>{{ event.name }}</div>
 <div>{{event.id}}</div>
 <div>{{session.id}}</div>
-
 {{#isOwner event session}}
   <form action="/events/{{id}}/delete" method="post" class="float-right">
     <button type="submit" class="btn btn-danger">
@@ -14,7 +13,6 @@
     <button id="join-button" type="submit" class="btn btn-primary">Join group</button>
   </form>
 {{/isOwner}}
-
 {{#each event.participants as |participant| }}
 {{participant.user.name}}
 {{/each }} --}}

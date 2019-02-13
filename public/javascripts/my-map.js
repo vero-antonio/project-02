@@ -192,6 +192,10 @@ class MyMap {
     if (window.eventPoints && window.eventPoints.length > 0) {
       this.showAllMarkers();
     }
+    //  marker.addListener('mouseover', function(){
+    //   window.map.addInfoWindow();
+    // })
+
 
     if (window.eventPoint) {
       this.addMarker(window.eventPoint[0], window.eventPoint[1]);
@@ -222,6 +226,9 @@ class MyMap {
     this.markers.push(marker);
 
 
+    marker.addListener('click', function() {
+      console.log(this.id);
+    });
     // marker.addListener('click', function() {
     //   console.log(this.id);
     // });
