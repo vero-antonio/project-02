@@ -1,6 +1,8 @@
 const Event = require("../models/event.model");
 const Schedule = require("../models/schedule.model");
 const mongoose = require('mongoose');
+const transporter = require('../configs/nodemailer.config'); //nuevo código para envío correo
+
 
 module.exports.list = (req, res, next) => {
   const { name, lat, lng } = req.query;
@@ -155,9 +157,20 @@ module.exports.join = (req, res, next) => {
       })
       return schedule.save()
         .then(schedule => {
+          console.log(req.user.email, event.name);
+          transporter.sendMail({
+            from: '"NearBy" <veronica.celemin@gmail.com>',
+            to: req.user.email,
+            // to: 'veronica.celemin@gmail.com',
+            subject: `Asistirás a: ${event.name}`,
+            text: `Te acabas de inscribir al evento: ${event.name}! añádelo a tu calendario pinchando en este enlace:`,
+            //html: 'www.elpais.com'//`/users/${user.token}`
+          })
+
           res.redirect(`/events/detail/${req.params.id}`)
         })
     }
   }).catch(error => next(error));
 }
+
 
