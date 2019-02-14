@@ -17,18 +17,19 @@ function addDays(date, days) {
   return result;
 }
 
+
 Event.deleteMany({}).then(console.log);
 
 // Build users
-axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=20&sig_id=242883568&sig=f8480669b4bdb7a8a65a625a443308e3204c26c7')
-  .then(function (response) {
+axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40&sig_id=252734794&lon=40.4172&lat=-3.7035&sig=d1634a0481f830a0c9b6f72d28ba26ec0f82fa90')
+.then(function (response) {
     for(var i = 0; i < response.data.events.length; i += 1){
       if(response.data.events[i].venue && new Date(response.data.events[i].local_date) > Date.now()){
         const event = new Event({
           name: response.data.events[i].name,
           dateRange: {
-            start: (new Date(response.data.events[i].local_date)),
-            end: (new Date(addDays(response.data.events[i].local_date, 1))),
+            start: (new Date(response.data.events[i].local_date + ' ' + response.data.events[i].local_time)),
+            end: (new Date(addDays((response.data.events[i].local_date + ' ' + response.data.events[i].local_time), 1))),
           },
           location:{
             coordinates: [response.data.events[i].venue.lat, response.data.events[i].venue.lon],
@@ -36,8 +37,8 @@ axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=20
           description: response.data.events[i].description,
           owner: "5c58a9aef90476affd9e95ae",
           interests: [constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id,constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id,constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id],
-          maxUsers: Math.floor(Math.random() * Math.floor(1000)),
-          picture:'https://source.unsplash.com/random',
+          maxUsers: Math.floor(Math.random() * Math.floor(200)),
+          picture:'https://source.unsplash.com/collection/385548/400x300',
           direction: response.data.events[i].venue.address_1
         });
         eventsArr.push(event);
