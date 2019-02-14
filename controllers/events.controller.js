@@ -6,10 +6,10 @@ const ics = require('ics');
 
 module.exports.list = (req, res, next) => {
   const { name, lat, lng } = req.query;
-  const criterial = {};
+  let criterial = {};
 
   //filter by user interests:
-  criteria = {
+  criterial = {
     interests: { $in: req.user.interests }
   }
 
@@ -31,7 +31,7 @@ module.exports.list = (req, res, next) => {
     };
   }
   
-  Event.find(criteria)
+  Event.find(criterial)
     .populate({ path: 'participants', populate: { path: 'user' }})
     .then(events => {
       // console.log(events);
@@ -179,9 +179,9 @@ module.exports.join = (req, res, next) => {
           });
 
           transporter.sendMail({
-            from: '"NearBy" <veronica.celemin@gmail.com>',
+            from: '"NearBy" <colmena.anto@gmail.com>',
             // to: req.user.email,
-            to: 'veronica.celemin@gmail.com',
+            to: 'colmena.anto@gmail.com',
             subject: `Asistirás a: ${event.name}`,
             text: `Te acabas de inscribir al evento: ${event.name}! añádelo a tu calendario con el fichero adjunto.`,
             html: `/events/detail/${req.params.id}`,
