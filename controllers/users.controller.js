@@ -1,9 +1,3 @@
-const createError = require('http-errors');
-const mongoose = require('mongoose');
-const User = require('../models/user.model');
-const Event = require('../models/event.model');
-// const passport = require('passport');
-
 module.exports.categories = (req, res, next) => {
   res.render('users/categories');
 }
@@ -13,10 +7,7 @@ module.exports.updateCategories = (req, res, next) => {
   req.user.interests = req.body.interests;
 
   req.user.save()
-    .then(() => res.redirect('/'))
+    .then(() => res.redirect('/events'))
 }
 
-module.exports.home = (req, res, next) => {
-  res.render('/events');
-}
 
