@@ -7,20 +7,13 @@ const meetup = require('meetup-api');
 const assert = require('assert');
 const axios = require('axios');
 const constants = require("../constants");
+const faker = require("Faker");
 require('../configs/db.config');
-
-const eventsArr = [];
-
-function addDays(date, days) {
-  var result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
-}
-
+const userArr = [];
 
 Event.deleteMany({}).then(console.log);
 
-// Build users
+// Build events
 axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40&sig_id=252734794&lon=40.4172&lat=-3.7035&sig=d1634a0481f830a0c9b6f72d28ba26ec0f82fa90')
 .then(function (response) {
     for(var i = 0; i < response.data.events.length; i += 1){
@@ -54,19 +47,33 @@ axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40
         mongoose.connection.close();
       })
   })
-  .catch(function (error) {
-    console.log(error);
+  .catch((error) => {
+    console.log({error});
     mongoose.connection.close();
+  })
+
+
+// Build users
+
+for (var i = 0; i < 20; i++){
+  const user = new User({
+    name: faker.Name.findName(),
+    email: faker.Internet.email(),
+    photo: faker.Image.imageUrl(),
+    interests: constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id,
   });
+  userArr.push(user);
+}
 
-
-// const users = FB_EMAILS.map(email => {
-//   return {
-//     name: 'Carlos',
-//     email: email,
-//     interests: ['social']
-//   }
-// })
+User.insertMany(userArr)
+  .then((users) => {
+    console.log({users});
+    mongoose.connection.close();
+  })
+  .catch((error) => {
+    console.log({error});
+    mongoose.connection.close();
+  })
 
 // User.create(users)
 //   .then(users => {
