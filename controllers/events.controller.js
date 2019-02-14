@@ -34,7 +34,6 @@ module.exports.list = (req, res, next) => {
   Event.find(criterial)
     .populate({ path: 'participants', populate: { path: 'user' }})
     .then(events => {
-      // console.log(events);
       const eventsCoordinates = events.map(event => {
         return {
           id: event.id,
@@ -93,7 +92,6 @@ const ifInterestsExist = ({ interests }, event) => (interests) && (event.interes
 const ifFileExists = ({ file }, event) => file && (event.picture = file.secure_url)
 
 module.exports.doCreate = (req, res, next) => {
-
   const event = new Event(req.body);
   event.owner = req.user.id;
 
@@ -154,11 +152,25 @@ module.exports.join = (req, res, next) => {
       return schedule.save()
         .then(schedule => {
           
-          const start = event.dateRange.start;
-          const dateStartArray = [Number(start.substring(0,4)),Number(start.substring(5,7)),Number(start.substring(8,10)),Number(start.substring(11,13)),Number(start.substring(14,16))];
-          const end = event.dateRange.end;
-          const dateEndArray = [Number(end.substring(0,4)),Number(end.substring(5,7)),Number(end.substring(8,10)),Number(end.substring(11,13)),Number(end.substring(14,16))];
+          const start = new Date(event.dateRange.start);
+          const end = new Date(event.dateRange.end);
           
+          const dateStartArray = [
+            start.getFullYear(),
+            start.getMonth() + 1,
+            start.getDate(),
+            start.getHours() - 1,
+            start.getMinutes()
+          ]
+
+          const dateEndArray = [
+            end.getFullYear(),
+            end.getMonth() + 1,
+            end.getDate(),
+            end.getHours() - 1,
+            end.getMinutes()
+          ]
+
           let reminder = '';
           const reminderData = {
             start: dateStartArray,
