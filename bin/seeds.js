@@ -10,6 +10,7 @@ require('../configs/db.config');
 const userArr = [];
 const eventsArr = [];
 const schedulesArr = [];
+const cat = constants.CATEGORIES;
 
 function addDays(date, days) {
   var result = new Date(date);
@@ -42,8 +43,8 @@ axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40
           },
           description: response.data.events[i].description,
           owner: "5c58a9aef90476affd9e95ae",
-          interests: [constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id,constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id,constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id],
-          maxUsers: Math.floor(Math.random() * Math.floor(200)),
+          interests: [cat[getRandomNum(cat.length)].id,cat[getRandomNum(cat.length)].id,cat[getRandomNum(cat.length)].id],
+          maxUsers: getRandomNum(200),
           picture:`https://res.cloudinary.com/ddby3wqlo/image/upload/v1550223768/event-pics/E${i + 1}.jpg`,
           direction: response.data.events[i].venue.address_1
         });
@@ -59,7 +60,7 @@ axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40
             name: faker.Name.findName(),
             email: faker.Internet.email(),
             photo: `https://res.cloudinary.com/ddby3wqlo/image/upload/v1550220868/profiles/P${i + 1}.jpg`,
-            interests: [constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id,constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id,constants.CATEGORIES[Math.floor(Math.random() * Math.floor(constants.CATEGORIES.length))].id],
+            interests: [cat[getRandomNum(cat.length)].id,cat[getRandomNum(cat.length)].id,cat[getRandomNum(cat.length)].id],
           });
           userArr.push(user);
         }
@@ -68,11 +69,10 @@ axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40
           .then((users) => {
 
             // Add users to events (build Schedules)  
-
             for (let i = 0; i < eventsArr.length; i++){
               const usersPositions = [];
-              for (let j = 0; j < (Math.floor(Math.random() * (eventsArr[i].maxUsers + 1))); j++){
-                const position = Math.floor(Math.random() * (userArr.length));
+              for (let j = 0; j < getRandomNum(eventsArr[i].maxUsers + 1); j++){  
+                const position = getRandomNum(userArr.length);
                 if (!usersPositions.includes(position)) {
                   const schedule = new Schedule({
                     event: eventsArr[i].id,
@@ -82,7 +82,6 @@ axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40
                   schedulesArr.push(schedule);
                 }
               }
-              console.log(usersPositions);
             }
   
             Schedule.insertMany(schedulesArr)
