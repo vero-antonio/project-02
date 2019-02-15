@@ -1,3 +1,4 @@
+const User = require("../models/user.model");
 const Event = require("../models/event.model");
 const Schedule = require("../models/schedule.model");
 const mongoose = require('mongoose');
@@ -61,8 +62,18 @@ module.exports.list = (req, res, next) => {
 module.exports.details = (req, res, next) => {
   Event.findById(req.params.id)
     .populate({ path: 'participants', populate: { path: 'user' }})
-    .then(event => {
-      res.render("events/detail", { event })
+    .then((event) => {
+      User.findById(event.owner)
+        .then(owner => {
+          Schedule.find({event: event.id})
+          .then(schedule => {
+            console.log(schedule); //PENDIENTE CAMBIAR ESTO!!! DA ERROR SI NO HAY SCHEDULE!!!
+            res.render("events/detail", { event, owner, schedule })
+          })
+          .catch(err => next(err));
+        })
+        .catch(err => next(err));
+
     })
     .catch(err => next(err));
 };

@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 16px 'Raleway', sans-serif;
   background-color: #eeeded;
   color: #333366;
@@ -9,10 +8,26 @@ a {
   color: #00B7FF;
 }
 
+.row {
+  margin-top: 40px
+}
+
 #map {
   width:  100%;
   height: 400px;
   margin-top:  20px;
+}
+
+/* categories: */
+
+.card{
+  background: #fff;
+  background-clip: padding-box;
+  background-size: cover;
+  border: 1px solid rgba(46,62,72,.12);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: block;
 }
 
 .card.selected {
@@ -30,33 +45,8 @@ a {
 .hidden {
   display: none;
 }
-#event-name{
-  padding-top: 40px;
-  text-align: center;
-}
 
-/* .container{
-  text-align: center;
-} */
-
-#attendees{
-  padding-top: 40px;
-}
-
-.card{
-  background: #fff;
-  background-clip: padding-box;
-  background-size: cover;
-  border: 1px solid rgba(46,62,72,.12);
-  border-radius: 8px;
-  box-sizing: border-box;
-  display: block;
-}
-
-.center{
-  padding-top: 60px;
-}
-
+/* navigation bar: */
 
 .navbar img {
   height: 45px;
@@ -65,6 +55,7 @@ a {
 .navbar-dark {
   background-color: #92a7b6;
   color: #333366;
+  margin-bottom: 30px;
 }
 
 .nav-ul-center {
@@ -79,60 +70,65 @@ a {
   margin: 180px;
 }
 
-/* estilos del botón para añadir foto: */
+/* event detail: */
 
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+#event-name {
+  color: #e63c1e;
 }
 
-.inputfile + label {
-  font-size: 1.25em;
-  font-weight: 700;
-  color: white;
-  background-color: black;
-  display: inline-block;
+.event-dates {
+  color: #403f3f;
+  font-size: 12px;
 }
 
-.inputfile:focus + label,
-.inputfile + label:hover {
-  background-color: red;
+#owner-container {
+  background-color: white;
+  border-radius:20px;
+  align-items: center;
+  display: inherit;
 }
 
-.inputfile + label {
-	cursor: pointer; /* "hand" cursor */
+#owner-container .rounded-circle {
+  height: 90px;
+  margin: 10px;
 }
 
-
-/* estilos del botón para añadir foto: */
-
-#event-name{
-  padding-top: 40px;
-  text-align: center;
+.attendees {
+  background-color: white;
+  border-radius:20px;
+  height: 220px;
 }
 
-/* .container{
-  text-align: center;
-} */
-
-#attendees{
-  padding-top: 40px;
+.attendee-pic {
+  justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.card{
-  background: #fff;
-  background-clip: padding-box;
-  background-size: cover;
-  border: 1px solid rgba(46,62,72,.12);
-  border-radius: 8px;
-  box-sizing: border-box;
-  display: block;
+.attendee-pic{
+  height: 80px;
+  width: 80px;
 }
 
-.center{
-  padding-top: 60px;
+.attendee-name {
+    text-align: center;
+    margin: 4px;
+}
+
+.prueba {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: .4rem;
+}
+
+.attendees-pic-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.more-participants {
+  margin-top: 20px;
+  text-align: right;
+  margin-right: 20px;
 }

@@ -1,43 +1,57 @@
-
-<h5>{{ event.dateRange.start}}</h5>
-<h1 id="event-name">{{ event.name }}</h1>
-
-<div class="container">
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
- <div class="carousel-inner">
-   <div class="carousel-item active">
-       <img src="{{event.picture}}" class="d-block w-100">
-   </div>
- </div>
+<div class="row">
+  <div class="col-sm-8">
+    <p class="event-dates">From: <span class="h6">{{ event.dateRange.start}}</span></p>
+    <p class="event-dates">To: <span class="h6">{{ event.dateRange.end}}</span></p>
+    <h2 id="event-name">{{ event.name }}</h2>
+  </div>
+  <div id="owner-container" class="col-sm-4">
+    <img class="col-sm-3 rounded-circle" src="{{ owner.photo }}" alt="profile pic">
+    <div>
+      <h6>Owner:</h6>
+      <p class="h5">{{ owner.name }}</p>
+    </div>
+  </div>
 </div>
-<h3>Details:</h3>
-<p>{{{event.description}}}</p>
 
-{{#isOwner event session}}
+<div class="row">
+  <div class="col-sm-8">
+    <img src="{{event.picture}}" class="d-block w-100">
+  </div>
+  <div class="col-sm-4">
+    <div id="map"></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-8">
+    <p>{{{event.description}}}</p>
+  </div>
+  <div class="col-sm-4">
+    <h4>Attendees:</h4>
+    <div>
+     {{#countParticipants event.participants }}
+    {{/countParticipants}}
+    </div>
+  </div>
+</div>
+
+
+{{#isOwner event session schedule }}
  <form action="/events/{{id}}/delete" method="post" class="center">
    <button type="submit" class="btn btn-danger">
      <i class="fas fa-times"></i>
      Delete Event
    </button>
  </form>
-{{else}}
- <form action="/events/{{id}}/join" method="post" class="center">
-   <button id="join-button" type="submit" class="btn btn-primary">Join group!</button>
- </form>
-
 {{/isOwner}}
 
-<h3 id="attendees">Attendees:</h3>
+{{#isJoined event session schedule }}
+  <form action="/events/{{id}}/join" method="post" class="center">
+    <button id="join-button" type="submit" class="btn btn-primary">Leave group</button>
+  </form>
+{{else}}
+  <form action="/events/{{id}}/join" method="post" class="center">
+    <button id="join-button" type="submit" class="btn btn-primary">Join group!</button>
+  </form>
+{{/isJoined}}
 
-<div class="row">
-  {{#each event.participants as |participant|}}
-      <div class="col-4 mb-2 mt-2" style="display: flex; justify-content: center">
-          <div class="card categories" style="width: 18rem;" data-category='{{participant.user.id}}'>
-              <img src="{{participant.user.photo}}" class="card-img-top" alt="{{participant.user.id}}">
-              <div class="card-body">
-                  <p class="card-text" style="text-align: center">{{participant.user.name}}</p>
-              </div>
-          </div>
-      </div>
-  {{/each}}
-</div>
