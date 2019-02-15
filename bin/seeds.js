@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 const User = require('../models/user.model');
 const Event = require("../models/event.model");
 const Schedule = require("../models/schedule.model");
-const FB_EMAILS = ["carlos@example.org"];
-const MEETUP_KEY = process.env.MEETUP_KEY ;
-const meetup = require('meetup-api');
-const assert = require('assert');
 const axios = require('axios');
 const constants = require("../constants");
 const faker = require("Faker");
@@ -20,6 +16,11 @@ function addDays(date, days) {
   result.setDate(result.getDate() + days);
   return result;
 }
+
+function getRandomNum(numMax) {
+  return Math.floor(Math.random() * Math.floor(numMax));
+}
+
 
 Event.deleteMany({}).then(console.log);
 User.deleteMany({}).then(console.log);
@@ -67,25 +68,31 @@ axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40
           .then((users) => {
 
             // Add users to events (build Schedules)  
+
             for (let i = 0; i < eventsArr.length; i++){
-            for (let j = 0; j < (Math.floor(Math.random() * (eventsArr[i].maxUsers + 1))); j++){
-              const position = Math.floor(Math.random() * (userArr.length));
-              const schedule = new Schedule({
-                event: eventsArr[i].id,
-                user: userArr[position].id 
-              });
-              schedulesArr.push(schedule);
+              const usersPositions = [];
+              for (let j = 0; j < (Math.floor(Math.random() * (eventsArr[i].maxUsers + 1))); j++){
+                const position = Math.floor(Math.random() * (userArr.length));
+                if (!usersPositions.includes(position)) {
+                  const schedule = new Schedule({
+                    event: eventsArr[i].id,
+                    user: userArr[position].id 
+                  });
+                  usersPositions.push(position);
+                  schedulesArr.push(schedule);
+                }
+              }
+              console.log(usersPositions);
             }
-          }
   
-          Schedule.insertMany(schedulesArr)
-            .then(schedules => {
-              mongoose.connection.close();
-            })
-            .catch((error) => {
-              console.log({error});
-              mongoose.connection.close();
-            })
+            Schedule.insertMany(schedulesArr)
+              .then(schedules => {
+                mongoose.connection.close();
+              })
+              .catch((error) => {
+                console.log({error});
+                mongoose.connection.close();
+              })
 
         })
           .catch((error) => {
