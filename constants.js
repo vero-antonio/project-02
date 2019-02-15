@@ -60,6 +60,7 @@ module.exports = {
             photo: "/images/tech01.JPG",
             name: "Technology & Inovation",
         }, 
-
     ]
 }
+
+
