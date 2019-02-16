@@ -233,10 +233,17 @@ module.exports.doLeave = (req, res, next) => {
 module.exports.myEvents = (req, res, next) => {
   Promise.all([
     Schedule.find({ user: req.user.id }).populate('event'),
-    Schedule.find({ owner: req.user.id}).populate("event")
-    ]).then(([eventGoing, myEvent]) => {
-      console.log(eventGoing)
-      res.render("events/myEvents", {eventGoing, myEvent});
+    Event.find({ owner: req.user.id}).populate("event")
+    ])
+    .then(([eventGoing, myEvent]) => {
+      console.log(myEvent);
+      const eventsAttending = eventGoing.map(schedule => schedule.event);
+      
+      
+      res.render("events/myEvents", {
+        eventsAttending,
+        myEvent
+      });
     })
     .catch(error => next(error));
   // Schedule.find({ user: req.user.id })

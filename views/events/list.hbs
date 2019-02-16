@@ -22,7 +22,7 @@
 
   <div class="row">
     {{#each events as |event|}}
-        <div class="col-4 mb-2 mt-2" style="display: flex; justify-content: center">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-2 mt-2" style="display: flex; justify-content: center">
             <a class="link-event" href="/events/detail/{{event.id}}">
             <div class="card event-list" style="width: 18rem;" data-event="{{event.id}}">
                 <img src="{{event.picture}}" class="card-img-top" alt="{{event.name}}">
