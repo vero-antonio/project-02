@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-8">
-    <p class="event-dates">From: <span class="h6">{{ event.dateRange.start}}</span></p>
-    <p class="event-dates">To: <span class="h6">{{ event.dateRange.end}}</span></p>
+    {{!-- <p class="event-dates">From: <span class="h6">{{ event.dateRange.start}}</span></p>
+    <p class="event-dates">To: <span class="h6">{{ event.dateRange.end}}</span></p> --}}
     <h2 id="event-name">{{ event.name }}</h2>
   </div>
   <div id="owner-container" class="col-sm-4">
@@ -29,8 +29,8 @@
   <div class="col-sm-4">
     <h4>Attendees:</h4>
     <div>
-     {{#countParticipants event.participants }}
-    {{/countParticipants}}
+      {{#countParticipants event.participants }}
+      {{/countParticipants}}
     </div>
   </div>
 </div>

@@ -89,5 +89,17 @@ eventSchema.virtual('participants', {
     options: { sort: { createdAt: -1 } }
 });
 
+
+eventSchema.pre('save', function(next) {
+    console.log(typeof(this.dateRange.start))
+    if (typeof this.dateRange.start !== Date) {
+        this.dateRange.start = new Date(this.dateRange.start);
+    }
+    if (typeof this.dateRange.end !== Date) {
+        this.dateRange.end = new Date(this.dateRange.end);
+    }
+    next();
+});
+
 const Event = mongoose.model("Event", eventSchema);
 module.exports = Event;
