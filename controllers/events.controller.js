@@ -11,7 +11,8 @@ module.exports.list = (req, res, next) => {
 
   //filter by user interests:
   criterial = {
-    interests: { $in: req.user.interests }
+    interests: { $in: req.user.interests },
+    'dateRange.start': { $gt: new Date() }
   }
 
   //filter by user interests:
@@ -32,14 +33,15 @@ module.exports.list = (req, res, next) => {
     };
   }
   
-  Event.find(criterial)
+  Event.find(criterial, {}, { sort: { 'dateRange.start': 1 } })
     .populate({ path: 'participants', populate: { path: 'user' }})
     .then(events => {
       const eventsCoordinates = events.map(event => {
         return {
           id: event.id,
           coordinates: event.location.coordinates,
-          interests: event.interests
+          interests: event.interests,
+          name: event.name
         }
       });
       events.forEach(event => {

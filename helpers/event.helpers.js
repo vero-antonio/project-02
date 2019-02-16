@@ -53,6 +53,7 @@ module.exports = (hbs) => {
                     <p>${participants[i].user.name}</p>
                   </div>
                 </div>`
+
       }
       return html;
     }

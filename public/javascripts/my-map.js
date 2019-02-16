@@ -203,7 +203,7 @@ class MyMap {
     }
   }
 
-  addMarker(lat, lng, id) {
+  addMarker(lat, lng, id, name) {
     const marker = new google.maps.Marker({
       position: { lat, lng },
       lat: lat,
@@ -211,11 +211,25 @@ class MyMap {
       map: this.googleMap,
       id: id ,
       zoom: 12 ,
+      name: name
     });
+
+    const infowindow = new google.maps.InfoWindow({
+      content: `<b>${name}</b>`,
+      maxWidth: 200
+    });
+    
+    marker.addListener('mouseover', function() {
+      infowindow.open(map, marker);
+    });
+
+    marker.addListener('mouseout', function() {
+      infowindow.close();
+    });  
 
     if (id) {
       marker.addListener('click', function() {
-        window.location = `/events/detail/${id}`;
+        window.location = `/events/detail/${id}`
       });
     }
 
@@ -229,13 +243,6 @@ class MyMap {
     marker.addListener('click', function() {
       console.log(this.id);
     });
-    // marker.addListener('click', function() {
-    //   console.log(this.id);
-    // });
-
-    // marker.addListener('mouseover', function(){
-    //   window.map.addInfoWindow();
-    // })
 
   }
 
@@ -301,7 +308,7 @@ class MyMap {
 
   showAllMarkers() {
     window.eventPoints.forEach((point) => {
-      this.addMarker(point.coordinates[0], point.coordinates[1], point.id);
+      this.addMarker(point.coordinates[0], point.coordinates[1], point.id, point.name);
     });
 
     this.googleMap.fitBounds(this.bounds);
