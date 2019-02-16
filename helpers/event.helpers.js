@@ -42,14 +42,14 @@ module.exports = (hbs) => {
       return html;
     } else {
       for ( let i = 0; i < participants.length; i++ ) {
-        html += `<div class=\"col-sm-4 attendees\">
-                  <div class=\"row attendee-pic\">
-                    <img class=\"rounded-circle" src=\"${participants[i].user.photo}\" alt=\"profile pic\">
-                  </div>
-                  <div class=\"attendee-name\">
-                    <p>${participants[i].user.name}</p>
-                  </div>
-                </div>`
+        html += `<div class=\"attendees\">
+        <div class=\"attendees-pic-container\">
+          <img class=\"attendee-pic rounded-circle" src=\"${participants[i].user.photo}\" alt=\"profile pic\">
+        </div>
+          <div class=\"attendee-name\">
+          <p>${participants[i].user.name}</p>
+        </div>
+      </div>`
       }
       return html;
     }

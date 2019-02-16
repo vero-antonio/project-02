@@ -39,7 +39,8 @@ module.exports.list = (req, res, next) => {
         return {
           id: event.id,
           coordinates: event.location.coordinates,
-          interests: event.interests
+          interests: event.interests,
+          name: event.name
         }
       });
       events.forEach(event => {
