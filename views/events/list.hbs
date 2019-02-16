@@ -13,13 +13,30 @@
 </form>
 
 <div id="map"></div>
-<ul>
+{{!-- <ul>
   {{#each events as |event| }}
     <li class="list-item"> {{ event.name }} <a class="ml-3" href="/events/detail/{{ event.id }}"><em>See detail</em></a></li>
     <li class="list-item"> {{ event.interests }} </li>
     <li class="list-item"> {{ event.participants.length }} people will attend</li>
   {{/each }}
-</ul>
+</ul> --}}
+
+  <div class="row">
+    {{#each events as |event|}}
+        <div class="col-4 mb-2 mt-2" style="display: flex; justify-content: center">
+            <a class="link-event" href="/events/detail/{{event.id}}">
+            <div class="card event-list" style="width: 18rem;" data-event="{{event.id}}">
+                <img src="{{event.picture}}" class="card-img-top" alt="{{event.name}}">
+                <div class="card-body">
+                    <p class="card-text" style="text-align: center">{{event.name}}</p>
+                    <p class="event-date">{{event.dateRange.start}}</p>
+                    <p class="event-date">People attending: {{event.participants.length}}</p>
+                </div>
+            </div>
+            </a>
+        </div>
+    {{/each}}
+  </div>
 <a class="btn btn-primary mb-3" href="/events/create">New Event</a>
 <a class="btn btn-primary mb-3" href="/">Back</a>
 

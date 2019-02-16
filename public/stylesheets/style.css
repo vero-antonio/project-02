@@ -132,3 +132,50 @@ a {
   text-align: right;
   margin-right: 20px;
 }
+
+/* event list page */
+
+.link-event{
+  color: black;
+
+}
+
+/* unvisited link */
+.link-event:link {
+  color: black;
+}
+
+/* visited link */
+.link-event:visited {
+  color: black;
+}
+
+/* mouse over link */
+.link-event:hover {
+  color: black;
+}
+
+/* selected link */
+.link-event:active {
+  color: black;
+}
+
+.link-event:link {
+  text-decoration: none;
+}
+
+.link-event:visited {
+  text-decoration: none;
+}
+
+.link-event:hover {
+  text-decoration: none;
+}
+
+.link-event:active {
+  text-decoration: none;
+}
+
+.event-date{
+  opacity: 0.4;
+}
