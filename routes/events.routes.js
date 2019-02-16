@@ -36,5 +36,9 @@ router.post('/:id/join',
   userMiddleware.haveInterests,
   eventsController.join);
 
+router.post('/:id/leave',
+  userMiddleware.isAuthenticated,
+  userMiddleware.haveInterests,
+  eventsController.doLeave);
 
 module.exports = router;

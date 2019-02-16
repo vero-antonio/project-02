@@ -36,22 +36,22 @@
 </div>
 
 
-{{#isOwner event session schedule }}
+{{!-- {{#isOwner event session schedule }}
  <form action="/events/{{id}}/delete" method="post" class="center">
    <button type="submit" class="btn btn-danger">
      <i class="fas fa-times"></i>
      Delete Event
    </button>
  </form>
-{{/isOwner}}
-
-{{#isJoined event session schedule }}
-  <form action="/events/{{id}}/join" method="post" class="center">
-    <button id="join-button" type="submit" class="btn btn-primary">Leave group</button>
-  </form>
 {{else}}
-  <form action="/events/{{id}}/join" method="post" class="center">
-    <button id="join-button" type="submit" class="btn btn-primary">Join group!</button>
-  </form>
-{{/isJoined}}
-
+  {{#isJoined event session schedule }}
+    <form action="/events/{{id}}/join" method="post" class="center">
+      <button id="join-button" type="submit" class="btn btn-primary">Leave group</button>
+    </form>
+  {{else}}
+    <form action="/events/{{id}}/join" method="post" class="center">
+      <button id="join-button" type="submit" class="btn btn-primary">Join group!</button>
+    </form>
+  {{/isJoined}}
+{{/isOwner}} --}}
+{{#isOwner event session schedule }}{{/isOwner}}

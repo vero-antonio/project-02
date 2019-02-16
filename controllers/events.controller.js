@@ -67,7 +67,6 @@ module.exports.details = (req, res, next) => {
         .then(owner => {
           Schedule.find({event: event.id})
           .then(schedule => {
-            console.log(schedule); //PENDIENTE CAMBIAR ESTO!!! DA ERROR SI NO HAY SCHEDULE!!!
             res.render("events/detail", { event, owner, schedule })
           })
           .catch(err => next(err));
@@ -219,6 +218,14 @@ module.exports.join = (req, res, next) => {
         })
     }
   }).catch(error => next(error));
+}
+
+module.exports.doLeave = (req, res, next) => {
+  Schedule.deleteOne({ event: req.params.id, user: req.user.id })
+    .then(schedule => {
+      res.redirect(`/events/detail/${req.params.id}`);
+    })
+    .catch(error => next(error));
 }
 
 
