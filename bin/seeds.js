@@ -24,9 +24,9 @@ function getRandomNum(numMax) {
 }
 
 
-Event.deleteMany({}).then(console.log);
-User.deleteMany({}).then(console.log);
-Schedule.deleteMany({}).then(console.log);
+// Event.deleteMany({}).then(console.log);
+// User.deleteMany({}).then(console.log);
+// Schedule.deleteMany({}).then(console.log);
 
 // Build events
 axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40&sig_id=252734794&lon=40.4172&lat=-3.7035&sig=d1634a0481f830a0c9b6f72d28ba26ec0f82fa90')

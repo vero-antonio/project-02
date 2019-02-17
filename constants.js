@@ -62,10 +62,10 @@ module.exports = {
         }, 
     ],
     
-    OWNERS: ["5c67f1e61bc870eecb5e4c4e",
-            "5c67f1e61bc870eecb5e4c4e",
-            "5c67f1e61bc870eecb5e4c4e",
-            "5c67f1e61bc870eecb5e4c4e"]
+    OWNERS: ["5c6943294a9e640017e4b829",
+            "5c6943e04a9e640017e4b82a",
+            "5c6944634a9e640017e4b82b",
+            "5c6944be4a9e640017e4b82c"]
 }
 
 
