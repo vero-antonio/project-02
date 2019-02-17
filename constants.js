@@ -61,6 +61,10 @@ module.exports = {
             name: "Technology & Inovation",
         }, 
     ],
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4504b4dc3914bccfe45f509afdd90facf068a24f
     OWNERS: ["5c67f1e61bc870eecb5e4c4e",
             "5c67f1e61bc870eecb5e4c4e",
             "5c67f1e61bc870eecb5e4c4e",

@@ -36,6 +36,7 @@ module.exports.list = (req, res, next) => {
   Event.find(criterial, {}, { sort: { 'dateRange.start': 1 } })
     .populate({ path: 'participants', populate: { path: 'user' }})
     .then(events => {
+      console.log(events.map(event => event.name));
       const eventsCoordinates = events.map(event => {
         return {
           id: event.id,

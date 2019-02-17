@@ -180,10 +180,12 @@ a {
   opacity: 0.4;
 }
 
+/*new*/
 .margin-top{
   margin-top: 30px;
 }
 
+<<<<<<< HEAD
 /* profile page */
 .center {
   display: block;
@@ -191,3 +193,5 @@ a {
   margin-right: auto;
   width: 50%;
 }
+=======
+>>>>>>> 4504b4dc3914bccfe45f509afdd90facf068a24f
