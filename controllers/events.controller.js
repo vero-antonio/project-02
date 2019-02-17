@@ -203,12 +203,11 @@ module.exports.join = (req, res, next) => {
           });
 
           transporter.sendMail({
-            from: '"NearBy" <veronica.celemin@gmail.com>',
-            // to: req.user.email,
-            to: 'veronica.celemin@gmail.com',
+            from: '"NearBy" <alwaysneaby@gmail.com>',
+            to: req.user.email,
             subject: `Asistirás a: ${event.name}`,
             text: `Te acabas de inscribir al evento: ${event.name}! añádelo a tu calendario con el fichero adjunto.`,
-            html: `/events/detail/${req.params.id}`,
+            html: `<a>https://git-project-02.herokuapp.com/events/detail/${req.params.id}</a>`,
             icalEvent: {
               filename: 'eventReminder.ics',
               method: 'request',
@@ -246,27 +245,6 @@ module.exports.myEvents = (req, res, next) => {
       });
     })
     .catch(error => next(error));
-  // Schedule.find({ user: req.user.id })
-  //   .populate('event')
-  //   .then((schedules) => {
-  //     const events = schedules.map((schedule) => {
-  //       return schedule.event;
-  //     })
-  //     console.log(events);
-  //     res.render("events/myEvents", {events});
-  //   })
-  //   .catch(error => next(error));
-  //   Schedule.find({ owner: req.user.id})
-  //     .populate('event')
-  //     .then((schedules) => {
-  //       const owner = schedules.map((schedule) => {
-  //         return schedule.event;
-  //       })
-  //       console.log(events);
-  //       console.log(owner);
-  //       res.render("events/myEvents", {events, owner});
-  //     })
-  //     .catch(error => next(error));
 } 
 
 

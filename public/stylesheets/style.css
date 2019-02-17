@@ -183,3 +183,11 @@ a {
 .margin-top{
   margin-top: 30px;
 }
+
+/* profile page */
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

@@ -21,7 +21,6 @@ function initMap() {
       newInput.value = category;
       newInput.id = `category-${category}`;
       newInput.display = 'none';
-  
       $("#categories-form").append(newInput);
     } else {
       $(`#categories-form #category-${category}`).remove();

@@ -60,7 +60,11 @@ module.exports = {
             photo: "/images/tech01.JPG",
             name: "Technology & Inovation",
         }, 
-    ]
+    ],
+    OWNERS: ["5c67f1e61bc870eecb5e4c4e",
+            "5c67f1e61bc870eecb5e4c4e",
+            "5c67f1e61bc870eecb5e4c4e",
+            "5c67f1e61bc870eecb5e4c4e"]
 }
 
 

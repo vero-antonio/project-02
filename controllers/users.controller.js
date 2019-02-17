@@ -1,3 +1,5 @@
+const User = require("../models/user.model");
+
 module.exports.categories = (req, res, next) => {
   res.render('users/categories');
 }
@@ -10,4 +12,13 @@ module.exports.updateCategories = (req, res, next) => {
     .then(() => res.redirect('/events'))
 }
 
+module.exports.profile = (req, res, next) => {
+  res.render("users/profile");
+};
 
+module.exports.profileUpdate = (req, res, next) => {
+  console.log('esto es interests' + req.body.interests);
+  User.findByIdAndUpdate(req.user.id, {interests: req.body.interests})
+    .then(() => res.redirect('/events'))
+    .catch((error) => console.log(error));
+}
