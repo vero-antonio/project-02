@@ -8,7 +8,7 @@ class MyMap {
 
   init() {
     this.googleMap = new google.maps.Map(this.containerDomElement, {
-      zoom: 16,
+      zoom: 15,
       center: { lat: 40.416732, lng: -3.703636 },
       styles: [
         {
@@ -192,9 +192,6 @@ class MyMap {
     if (window.eventPoints && window.eventPoints.length > 0) {
       this.showAllMarkers();
     }
-    //  marker.addListener('mouseover', function(){
-    //   window.map.addInfoWindow();
-    // })
 
 
     if (window.eventPoint) {
@@ -202,6 +199,7 @@ class MyMap {
       this.googleMap.setCenter(new google.maps.LatLng(window.eventPoint[0], window.eventPoint[1]), 10);
     }
   }
+  
 
   addMarker(lat, lng, id, name) {
     const marker = new google.maps.Marker({

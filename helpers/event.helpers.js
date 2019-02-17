@@ -1,3 +1,6 @@
+const moment = require('moment');
+moment().format();
+
 module.exports = (hbs) => {
 
   hbs.registerHelper('isOwner', (event, user, schedule, options) => {
