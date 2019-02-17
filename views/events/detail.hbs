@@ -17,12 +17,13 @@
       <img src="{{event.picture}}" class="d-block w-100">
     </div>
     <div class="col-sm-4">
-      <div id="map" class="detail-map"></div>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query={{ lat }}%2C{{ lng }}" class="mapLink" target="_blank noreferrer noopener">
+        <img src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCV5VxGYZUhY8hrXm8mNqoXKG-iD2P7r2w&markers=icon%3Ahttps%3A%2F%2Fsecure.meetupstatic.com%2Fs%2Fimg%2F5961591462445047%2Fmup-custom-google-map-pin.png%7C{{ lat }}%2C{{ lng }}&zoom=16&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x242f3e&style=element:labels.text.fill%7Ccolor:0x746855&style=element:labels.text.stroke%7Ccolor:0x242f3e&style=feature:administrative.locality%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:poi%7Celement:labels.text%7Cvisibility:off&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:poi.business%7Cvisibility:off&style=feature:poi.park%7Celement:geometry%7Ccolor:0x263c3f&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x6b9a76&style=feature:road%7Celement:geometry%7Ccolor:0x38414e&style=feature:road%7Celement:geometry.stroke%7Ccolor:0x212a37&style=feature:road%7Celement:labels.icon%7Cvisibility:off&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x9ca5b3&style=feature:road.highway%7Celement:geometry%7Ccolor:0x746855&style=feature:road.highway%7Celement:geometry.stroke%7Ccolor:0x1f2835&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0xf3d19c&style=feature:transit%7Cvisibility:off&style=feature:transit%7Celement:geometry%7Ccolor:0x2f3948&style=feature:transit.station%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:water%7Celement:geometry%7Ccolor:0x17263c&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x515c6d&style=feature:water%7Celement:labels.text.stroke%7Ccolor:0x17263c&size=350x400" alt="event location">
+      </a>
       <div id="dates">
         <p class="event-dates"><i class="far fa-clock"></i> From: {{#dateFormat event.dateRange.start}}{{/dateFormat}}</p>
         <p class="event-dates"><i class="far fa-clock"></i> To: {{#dateFormat event.dateRange.end}}{{/dateFormat}}</p>
         <p class="event-dates"><span class="h6"><i class="fas fa-map-marker-alt"></i>  {{ event.direction}}</span></p>
-
       </div>
     </div>
   </div>
@@ -43,11 +44,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  const lat = decodeURIComponent('{{{lat}}}');
-  const lng = decodeURIComponent('{{{lng}}}');
-
-  window.eventPoint = [parseFloat(lat), parseFloat(lng)];
-
-</script>

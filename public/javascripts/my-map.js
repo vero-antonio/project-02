@@ -10,6 +10,12 @@ class MyMap {
     this.googleMap = new google.maps.Map(this.containerDomElement, {
       zoom: 15,
       center: { lat: 40.416732, lng: -3.703636 },
+      zoomControl: true,
+      mapTypeControl: false,
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: true,
       styles: [
         {
           "elementType": "geometry",
