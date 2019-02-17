@@ -1,57 +1,53 @@
-<div class="row">
-  <div class="col-sm-8">
-    {{!-- <p class="event-dates">From: <span class="h6">{{ event.dateRange.start}}</span></p>
-    <p class="event-dates">To: <span class="h6">{{ event.dateRange.end}}</span></p> --}}
-    <h2 id="event-name">{{ event.name }}</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2 id="event-name">{{ event.name }}</h2>
+    </div>
+    <div id="owner-container" class="col-sm-4">
+      <img class="col-sm-3 rounded-circle" src="{{ owner.photo }}" alt="profile pic">
+      <div>
+        <h6>Owner:</h6>
+        <p class="h5">{{ owner.name }}</p>
+      </div>
+    </div>
   </div>
-  <div id="owner-container" class="col-sm-4">
-    <img class="col-sm-3 rounded-circle" src="{{ owner.photo }}" alt="profile pic">
-    <div>
-      <h6>Owner:</h6>
-      <p class="h5">{{ owner.name }}</p>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <img src="{{event.picture}}" class="d-block w-100">
+    </div>
+    <div class="col-sm-4">
+      <div id="map" class="detail-map"></div>
+      <div id="dates">
+        <p class="event-dates"><i class="far fa-clock"></i> From: {{#dateFormat event.dateRange.start}}{{/dateFormat}}</p>
+        <p class="event-dates"><i class="far fa-clock"></i> To: {{#dateFormat event.dateRange.end}}{{/dateFormat}}</p>
+        <p class="event-dates"><span class="h6"><i class="fas fa-map-marker-alt"></i>  {{ event.direction}}</span></p>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <p>{{{event.description}}}</p>
+    </div>
+    <div class="col-sm-4">
+      <h4>Attendees:</h4>
+      <div class="mt-4">
+        {{#countParticipants event.participants }}
+        {{/countParticipants}}
+      </div>
+      <div class="mt-4">
+        {{#isOwner event session schedule }}{{/isOwner}}
+      </div>
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-8">
-    <img src="{{event.picture}}" class="d-block w-100">
-  </div>
-  <div class="col-sm-4">
-    <div id="map"></div>
-  </div>
-</div>
+<script>
+  const lat = decodeURIComponent('{{{lat}}}');
+  const lng = decodeURIComponent('{{{lng}}}');
 
-<div class="row">
-  <div class="col-sm-8">
-    <p>{{{event.description}}}</p>
-  </div>
-  <div class="col-sm-4">
-    <h4>Attendees:</h4>
-    <div>
-      {{#countParticipants event.participants }}
-      {{/countParticipants}}
-    </div>
-  </div>
-{{#isOwner event session schedule }}{{/isOwner}}
-</div>
+  window.eventPoint = [parseFloat(lat), parseFloat(lng)];
 
-
-{{!-- {{#isOwner event session schedule }}
- <form action="/events/{{id}}/delete" method="post" class="center">
-   <button type="submit" class="btn btn-danger">
-     <i class="fas fa-times"></i>
-     Delete Event
-   </button>
- </form>
-{{else}}
-  {{#isJoined event session schedule }}
-    <form action="/events/{{id}}/join" method="post" class="center">
-      <button id="join-button" type="submit" class="btn btn-primary">Leave group</button>
-    </form>
-  {{else}}
-    <form action="/events/{{id}}/join" method="post" class="center">
-      <button id="join-button" type="submit" class="btn btn-primary">Join group!</button>
-    </form>
-  {{/isJoined}}
-{{/isOwner}} --}}
+</script>

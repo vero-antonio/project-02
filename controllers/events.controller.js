@@ -4,6 +4,8 @@ const Schedule = require("../models/schedule.model");
 const mongoose = require('mongoose');
 const transporter = require('../configs/nodemailer.config'); 
 const ics = require('ics'); 
+const moment = require('moment');
+moment().format();
 
 module.exports.list = (req, res, next) => {
   const { name, lat, lng } = req.query;
@@ -36,7 +38,6 @@ module.exports.list = (req, res, next) => {
   Event.find(criterial, {}, { sort: { 'dateRange.start': 1 } })
     .populate({ path: 'participants', populate: { path: 'user' }})
     .then(events => {
-      console.log(events.map(event => event.name));
       const eventsCoordinates = events.map(event => {
         return {
           id: event.id,
@@ -66,11 +67,16 @@ module.exports.details = (req, res, next) => {
   Event.findById(req.params.id)
     .populate({ path: 'participants', populate: { path: 'user' }})
     .then((event) => {
+      const lat = event.location.coordinates[0];
+      const lng = event.location.coordinates[1];
+
+      const date = moment(event.dateRange.start);
+      console.log('Este momento:', moment(date).locale('es').format('LLLL'));
       User.findById(event.owner)
         .then(owner => {
           Schedule.find({event: event.id})
           .then(schedule => {
-            res.render("events/detail", { event, owner, schedule })
+            res.render("events/detail", { event, owner, schedule, lat, lng })
           })
           .catch(err => next(err));
         })

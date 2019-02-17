@@ -12,10 +12,9 @@ a {
   margin-top: 40px
 }
 
-#map {
-  width:  100%;
-  height: 400px;
-  margin-top:  20px;
+.btn {
+  background-color: #eb641c !important;
+  border-color: #eb641c !important;
 }
 
 /* categories: */
@@ -55,7 +54,6 @@ a {
 .navbar-dark {
   background-color: #92a7b6;
   color: #333366;
-  margin-bottom: 30px;
 }
 
 .nav-ul-center {
@@ -70,7 +68,25 @@ a {
   margin: 180px;
 }
 
+/* events list: */
+
+.list-map-container {
+  padding: 0;
+  margin-bottom: 20px;
+  box-shadow: 4px 0 8px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
+}
+
+.list-map {
+  width:  100%;
+  height: 600px;
+}
+
 /* event detail: */
+
+.detail-map {
+  width:  100%;
+  height: 400px;
+}
 
 #event-name {
   color: #e63c1e;

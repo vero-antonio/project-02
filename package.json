@@ -23,6 +23,7 @@
     "http-errors": "^1.6.3",
     "ics": "^2.13.1",
     "meetup-api": "^1.4.37",
+    "moment": "^2.24.0",
     "mongoose": "^5.4.7",
     "morgan": "~1.9.0",
     "multer": "^1.4.1",
