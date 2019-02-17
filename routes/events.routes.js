@@ -41,4 +41,9 @@ router.post('/:id/leave',
   userMiddleware.haveInterests,
   eventsController.doLeave);
 
+router.get('/myEvents',
+  userMiddleware.isAuthenticated,
+  userMiddleware.haveInterests,
+  eventsController.myEvents);
+
 module.exports = router;

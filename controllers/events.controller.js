@@ -231,4 +231,43 @@ module.exports.doLeave = (req, res, next) => {
     .catch(error => next(error));
 }
 
+module.exports.myEvents = (req, res, next) => {
+  Promise.all([
+    Schedule.find({ user: req.user.id }).populate('event'),
+    Event.find({ owner: req.user.id}).populate("event")
+    ])
+    .then(([eventGoing, myEvent]) => {
+      console.log(myEvent);
+      const eventsAttending = eventGoing.map(schedule => schedule.event);
+      
+      
+      res.render("events/myEvents", {
+        eventsAttending,
+        myEvent
+      });
+    })
+    .catch(error => next(error));
+  // Schedule.find({ user: req.user.id })
+  //   .populate('event')
+  //   .then((schedules) => {
+  //     const events = schedules.map((schedule) => {
+  //       return schedule.event;
+  //     })
+  //     console.log(events);
+  //     res.render("events/myEvents", {events});
+  //   })
+  //   .catch(error => next(error));
+  //   Schedule.find({ owner: req.user.id})
+  //     .populate('event')
+  //     .then((schedules) => {
+  //       const owner = schedules.map((schedule) => {
+  //         return schedule.event;
+  //       })
+  //       console.log(events);
+  //       console.log(owner);
+  //       res.render("events/myEvents", {events, owner});
+  //     })
+  //     .catch(error => next(error));
+} 
+
 
