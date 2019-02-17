@@ -11,6 +11,7 @@ const userArr = [];
 const eventsArr = [];
 const schedulesArr = [];
 const cat = constants.CATEGORIES;
+const ownersArr = constants.OWNERS; 
 
 function addDays(date, days) {
   var result = new Date(date);
@@ -42,7 +43,7 @@ axios.get('https://api.meetup.com/find/upcoming_events?photo-host=public&page=40
             coordinates: [response.data.events[i].venue.lat, response.data.events[i].venue.lon],
           },
           description: response.data.events[i].description,
-          owner: "5c58a9aef90476affd9e95ae",
+          owner: ownersArr[getRandomNum(ownersArr.length)],
           interests: [cat[getRandomNum(cat.length)].id,cat[getRandomNum(cat.length)].id,cat[getRandomNum(cat.length)].id],
           maxUsers: getRandomNum(200),
           picture:`https://res.cloudinary.com/ddby3wqlo/image/upload/v1550223768/event-pics/E${i + 1}.jpg`,
