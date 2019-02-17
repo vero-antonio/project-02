@@ -11,9 +11,8 @@ const userArr = [];
 const eventsArr = [];
 const schedulesArr = [];
 const cat = constants.CATEGORIES;
-//AÑADIR:
 const ownersArr = constants.OWNERS; 
-//
+
 function addDays(date, days) {
   var result = new Date(date);
   result.setDate(result.getDate() + days);
