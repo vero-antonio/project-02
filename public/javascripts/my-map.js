@@ -219,7 +219,9 @@ class MyMap {
     });
 
     const infowindow = new google.maps.InfoWindow({
-      content: `<b>${name}</b>`,
+      content: `<h1>prueba</h1>
+                <b>${name}</b>
+                `,
       maxWidth: 200
     });
     

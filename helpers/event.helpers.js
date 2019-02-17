@@ -21,8 +21,8 @@ module.exports = (hbs) => {
         }
       }
     }
-    return `<form action=\"/events/${event.id}/${route}\" method=\"post\" class=\"center\">
-              <button id=\"join-button\" type=\"submit\" class=\"btn btn-primary\">${isJoined}</button>
+    return `<form action=\"/events/${event.id}/${route}\" method=\"post\" class=\"detail-form\">
+              <button id=\"join-button\" type=\"submit\" class=\"btn btn-primary detail-button\">${isJoined}</button>
             </form>`
   })
 

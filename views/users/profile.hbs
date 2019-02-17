@@ -1,7 +1,32 @@
     <div class="container">
-      <div class="row flex-row">
-      <img class="center rounded-circle" src="{{ session.photo }}" alt="profile pic"style="width:250px;height:250px;">
-      {{!-- <h3 class="center">email: {{session.email}}</h3> --}}
+
+      <div class="profile-info">
+        <div>
+          <img class="rounded-circle" src="{{ session.photo }}" alt="profile pic">
+        </div>
+        <div class="profile-info__data">
+          <span class="info-title">Email:</span>
+          <span class="info">{{session.email}}</span>
+          <span class="info-title">Name:</span>
+          <span class="info">{{session.name}}</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <h4 class="profile-content__title">Interest:</h4>
+        {{> topics }}
+      </div>
+
+      <div>
+        <form class="col-12" id="categories-form" action="/profile" method='post'>
+              <button type="submit" class="center mt-3 btn btn-secondary">Edit</button>
+        </form>
+      </div>
+    </div>
+
+
+    {{!-- <div class="row flex-row">
+      <img class="center rounded-circle" src="{{ session.photo }}" alt="profile pic" style="width:250px;height:250px;">
       </div>
       <br>
       <br>
@@ -21,5 +46,4 @@
         <form class="col-12" id="categories-form" action="/profile" method='post'>
             <button type="submit" class="center mt-3 btn btn-secondary">Edit</button>
         </form>
-      </div>
-    </div>
+    </div> --}}
