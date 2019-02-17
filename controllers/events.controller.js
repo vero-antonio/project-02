@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const Event = require("../models/event.model");
 const Schedule = require("../models/schedule.model");
+const constants = require("../constants");
 const mongoose = require('mongoose');
 const transporter = require('../configs/nodemailer.config'); 
 const ics = require('ics'); 
@@ -8,12 +9,20 @@ const moment = require('moment');
 moment().format();
 
 module.exports.list = (req, res, next) => {
+  
   const { name, lat, lng } = req.query;
   let criterial = {};
 
   //filter by user interests:
+  let interests = [];
+  if ( !req.user ) {
+    interests = constants.CATEGORIES.map(({ id }) => id);
+  } else {
+    interests = req.user.interests;
+  }
+
   criterial = {
-    interests: { $in: req.user.interests },
+    interests: { $in: interests },
     'dateRange.start': { $gt: new Date() }
   }
 
@@ -43,7 +52,8 @@ module.exports.list = (req, res, next) => {
           id: event.id,
           coordinates: event.location.coordinates,
           interests: event.interests,
-          name: event.name
+          name: event.name,
+          picture: event.picture
         }
       });
       events.forEach(event => {
@@ -120,7 +130,7 @@ module.exports.doCreate = (req, res, next) => {
   ifInterestsExist(req.body, event)
 
   event.save()
-    .then(() => res.redirect("/events"))
+    .then(() => res.redirect("/"))
     .catch(error => {
       if (error instanceof mongoose.Error.ValidationError) {
         res.render("events/create", {
@@ -148,7 +158,7 @@ module.exports.doDelete = (req, res, next) => {
       if (!event) {
         next(createError(404, 'Event not found'));
       } else {
-        res.redirect('/events');
+        res.redirect('/');
       }
     })
     .catch(error => next(error));
@@ -162,7 +172,7 @@ module.exports.join = (req, res, next) => {
     if (!event) {
       next(createError(404, 'Event not found'));
     } else if (schedule) {
-      res.redirect(`/events/detail/${req.params.id}`)
+      res.redirect(`/detail/${req.params.id}`)
     } else {
       schedule = new Schedule({
         event: req.params.id,
@@ -214,7 +224,8 @@ module.exports.join = (req, res, next) => {
             to: req.user.email,
             subject: `Asistirás a: ${event.name}`,
             text: `Te acabas de inscribir al evento: ${event.name}! añádelo a tu calendario con el fichero adjunto.`,
-            html: `<a>https://git-project-02.herokuapp.com/events/detail/${req.params.id}</a>`,
+            html: `<h3>Te acabas de inscribir al evento: </h3><a href="https://git-project-02.herokuapp.com/detail/${req.params.id}"><h2>${event.name}</h2></a>
+                  <img src=${event.picture} height="400px"></img>`,
             icalEvent: {
               filename: 'eventReminder.ics',
               method: 'request',
@@ -222,7 +233,7 @@ module.exports.join = (req, res, next) => {
             }
           })
 
-          res.redirect(`/events/detail/${req.params.id}`)
+          res.redirect(`/detail/${req.params.id}`)
         })
     }
   }).catch(error => next(error));
@@ -231,7 +242,7 @@ module.exports.join = (req, res, next) => {
 module.exports.doLeave = (req, res, next) => {
   Schedule.deleteOne({ event: req.params.id, user: req.user.id })
     .then(schedule => {
-      res.redirect(`/events/detail/${req.params.id}`);
+      res.redirect(`/detail/${req.params.id}`);
     })
     .catch(error => next(error));
 }
@@ -245,8 +256,7 @@ module.exports.myEvents = (req, res, next) => {
       console.log(myEvent);
       const eventsAttending = eventGoing.map(schedule => schedule.event);
       
-      
-      res.render("events/myEvents", {
+      res.render("events/my-events", {
         eventsAttending,
         myEvent
       });

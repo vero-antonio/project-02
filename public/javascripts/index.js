@@ -25,6 +25,7 @@ function initMap() {
     } else {
       $(`#categories-form #category-${category}`).remove();
     }
+
   })
 
 

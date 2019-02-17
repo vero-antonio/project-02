@@ -4,9 +4,8 @@ const eventsController = require('../controllers/events.controller');
 const userMiddleware = require('../middlewares/user.middlewares');
 const upload = require('../configs/multer.config');
 
-router.get('/', 
-  userMiddleware.isAuthenticated,
-  userMiddleware.haveInterests,
+router.get('/',
+  userMiddleware.editInterests, 
   eventsController.list);
 
 router.get('/create', 
@@ -41,7 +40,7 @@ router.post('/:id/leave',
   userMiddleware.haveInterests,
   eventsController.doLeave);
 
-router.get('/myEvents',
+router.get('/my-events',
   userMiddleware.isAuthenticated,
   userMiddleware.haveInterests,
   eventsController.myEvents);

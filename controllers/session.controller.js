@@ -18,7 +18,7 @@ module.exports.doLogin = (req, res, next) => {
           if (error){ 
             next(error);
           } else {
-            res.redirect('/events');
+            res.redirect('/');
           }
         });
       } 
@@ -27,7 +27,7 @@ module.exports.doLogin = (req, res, next) => {
 
   module.exports.delete = (req, res, next) => {
     req.logout();
-    res.redirect('/session/login');
+    res.redirect('/');
   }
 
   

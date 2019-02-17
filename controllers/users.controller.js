@@ -9,7 +9,7 @@ module.exports.updateCategories = (req, res, next) => {
   req.user.interests = req.body.interests;
 
   req.user.save()
-    .then(() => res.redirect('/events'))
+    .then(() => res.redirect('/'))
 }
 
 module.exports.profile = (req, res, next) => {
@@ -17,8 +17,12 @@ module.exports.profile = (req, res, next) => {
 };
 
 module.exports.profileUpdate = (req, res, next) => {
-  console.log('esto es interests' + req.body.interests);
-  User.findByIdAndUpdate(req.user.id, {interests: req.body.interests})
-    .then(() => res.redirect('/events'))
+  User.findById(req.user.id)
+    .then(() => {
+      console.log('esto es interests' + req.body.interests);
+      User.findByIdAndUpdate(req.user.id, {interests: req.body.interests})
+        .then(() => res.redirect('/'))
+        .catch((error) => console.log(error));
+    })
     .catch((error) => console.log(error));
 }

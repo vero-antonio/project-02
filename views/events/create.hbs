@@ -1,6 +1,6 @@
 <section id="event-create" class="container">
   <h1 class="mt-3">Start a new group!</h1>
-  <form action="/events/create" method="POST" enctype="multipart/form-data" id="categories-form">
+  <form action="/create" method="POST" enctype="multipart/form-data" id="categories-form" class="create-form">
     <div class="form-group">
       <label for="name">What will your group's name be?</label>
       <input type="text" class="form-control" id="name" name="name" value="{{event.name}}">
@@ -35,7 +35,7 @@
       <label for="direction">What's your new group's hometown?</label>
       <input id="pac-input" class="form-control" type="text" placeholder="Add the location" name="direction" value="{{event.direction}}">
       {{#if errors.location }} <div class="invalid-feedback d-block">{{ errors.location }}</div> {{/if }}
-      <div id="map"></div>
+      <div id="map" class="list-map row"></div>
     </div>
   
     <input type="text" value="{{event.longitude}}" id="longitude" class="hidden" name="longitude"/>

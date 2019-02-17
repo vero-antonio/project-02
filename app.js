@@ -58,8 +58,8 @@ app.use((req, res, next) => {
 
 app.use('/', usersRouter);
 app.use('/session', sessionRouter);
-app.use('/events', eventsRouter);
-app.get('/', (req, res) => res.redirect('/home'));
+app.use('/', eventsRouter);
+app.get('/', (req, res) => res.redirect('/'));
 
 
 // catch 404 and forward to error handler

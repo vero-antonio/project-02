@@ -3,7 +3,7 @@
 </div>
 
 <div class="container">
-  <form action="/events" method="GET">
+  <form action="/" method="GET">
     <div class="form-group">
       <label for="name">Search for events by name:</label>
       <input type="text" class="form-control" id="name" name="name" value="{{name}}">
@@ -13,12 +13,13 @@
       <input id="pac-input" class="form-control" type="text" placeholder="Add the location">
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
+    <a class="btn btn-primary" href="/">Show all</a>
   </form>
 
   <div class="row">
     {{#each events as |event|}}
         <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-2 mt-2" style="display: flex; justify-content: center">
-            <a class="link-event" href="/events/detail/{{event.id}}">
+            <a class="link-event" href="/detail/{{event.id}}">
             <div class="card event-list" style="width: 18rem;" data-event="{{event.id}}">
                 <img src="{{event.picture}}" class="card-img-top" alt="{{event.name}}">
                 <div class="card-body">

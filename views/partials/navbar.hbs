@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-	<img src="/images/nearBy_logo.png" alt="NearBy logo">
+	<a href="/"><img src="/images/nearBy_logo.png" alt="NearBy logo"></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -7,10 +7,10 @@
 		<ul class="navbar-nav ml-auto nav-ul-center">
 			{{#if session}}
 				<li class="nav-item active">
-					<a class="nav-link" href="/events">Search for events</a>
+					<a class="nav-link" href="/">Search for events</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="/events/create">Create an event</a>
+					<a class="nav-link" href="/create">Create an event</a>
 				</li>
 
 				<li class="nav-item dropdown">
@@ -18,7 +18,7 @@
 							<img class="rounded-circle" src="{{ session.photo }}" alt="profile pic">
 					</a>
 					<div class="dropdown-menu popup-align" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/events/myEvents">My events</a>
+						<a class="dropdown-item" href="/my-events">My events</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="/profile">Profile</a>
 						<div class="dropdown-divider"></div>

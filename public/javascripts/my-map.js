@@ -207,7 +207,7 @@ class MyMap {
   }
   
 
-  addMarker(lat, lng, id, name) {
+  addMarker(lat, lng, id, name, picture) {
     const marker = new google.maps.Marker({
       position: { lat, lng },
       lat: lat,
@@ -215,11 +215,12 @@ class MyMap {
       map: this.googleMap,
       id: id ,
       zoom: 12 ,
-      name: name
+      name: name,
+      picture: picture
     });
 
     const infowindow = new google.maps.InfoWindow({
-      content: `<h1>prueba</h1>
+      content: `<img class="info-window-img" src="${picture}" alt="event image">
                 <b>${name}</b>
                 `,
       maxWidth: 200
@@ -235,7 +236,7 @@ class MyMap {
 
     if (id) {
       marker.addListener('click', function() {
-        window.location = `/events/detail/${id}`
+        window.location = `/detail/${id}`
       });
     }
 
@@ -314,7 +315,7 @@ class MyMap {
 
   showAllMarkers() {
     window.eventPoints.forEach((point) => {
-      this.addMarker(point.coordinates[0], point.coordinates[1], point.id, point.name);
+      this.addMarker(point.coordinates[0], point.coordinates[1], point.id, point.name, point.picture);
     });
 
     this.googleMap.fitBounds(this.bounds);
