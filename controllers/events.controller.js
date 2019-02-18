@@ -35,7 +35,7 @@ module.exports.list = (req, res, next) => {
   if (lat && lng) {
     criterial.location = {
       $near: {
-        $maxDistance: 1000,
+        $maxDistance: 2000,
         $geometry: {
           type: "Point",
           coordinates: [lng, lat]
@@ -253,7 +253,6 @@ module.exports.myEvents = (req, res, next) => {
     Event.find({ owner: req.user.id}).populate("event")
     ])
     .then(([eventGoing, myEvent]) => {
-      console.log(myEvent);
       const eventsAttending = eventGoing.map(schedule => schedule.event);
       
       res.render("events/my-events", {

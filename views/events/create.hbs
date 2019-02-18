@@ -44,7 +44,19 @@
     <div class="form-group">
       <label for="direction" class="label-margin">What will your event be about? Select 1 or more topics:</label>
       {{#if errors.interests }} <div class="invalid-feedback d-block">{{ errors.interests }}</div> {{/if }}
-      {{> topics }}
+      <div class="topics">
+      {{#each allCategories as |category|}}
+          <div class="topics-item">
+              <div class="card categories" style="width: 13rem;" data-category='{{category.id}}'> 
+                  <img src="{{category.photo}}" class="card-img-top" alt="{{category.id}}">
+                  <div class="card-body">
+                      <p class="card-text" style="text-align: center">{{category.name}}</p>
+                  </div>
+              </div>
+          </div>
+      {{/each}}
+</div>
+
     </div>
 
 

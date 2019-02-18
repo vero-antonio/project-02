@@ -1,27 +1,26 @@
 const User = require("../models/user.model");
 
-module.exports.categories = (req, res, next) => {
-  res.render('users/categories');
-}
-
-module.exports.updateCategories = (req, res, next) => {
-
-  req.user.interests = req.body.interests;
-
-  req.user.save()
-    .then(() => res.redirect('/'))
-}
-
 module.exports.profile = (req, res, next) => {
   res.render("users/profile");
-  console.log('esto es interests' + req.user.interests);
-
 };
 
 module.exports.profileUpdate = (req, res, next) => {
+  let name = req.user.name;
+  let email = req.user.email;
+  let interests = req.user.interests;
 
-  // console.log('esto es interests' + req.body.interests);
-  User.findByIdAndUpdate(req.user.id, {interests: req.body.interests})
+  if ( req.body.name ) {
+    name = req.body.name;
+  };
+  if ( req.body.emails ) {
+    email = req.body.email;
+  };
+  if ( req.body.interests ) {
+    interests = req.body.interests;
+  };
+
+  User.findByIdAndUpdate(req.user.id, {interests: interests, name: name, email: email})
     .then(() => res.redirect('/'))
     .catch((error) => console.log(error));
+  
 }

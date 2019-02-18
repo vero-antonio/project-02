@@ -1,11 +1,11 @@
 
 module.exports = (hbs) => {
 
-  hbs.registerHelper('hasCategories', (category, userCat, options) => {
-    if ( userCat.some(category) ) {
-      return ' selected';
-    } else {
-      return options.inverse(this);
+  hbs.registerHelper('hasCategories', (userCat, category, options) => {
+    for ( let i = 0; i < userCat.length; i++ ) {
+      if ( userCat[i] === category  ) {
+        return ' selected';
+      }
     }
   })
 

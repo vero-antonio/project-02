@@ -359,7 +359,8 @@ a {
 
 .info {
   margin-bottom: .8rem;
-  font-size: 1.1rem
+  font-size: 1.1rem;
+  width: 23rem;
 }
 
 .info-title {
@@ -405,4 +406,8 @@ a {
 
 .header-my-events h3{
   margin: 0;
+}
+
+.empty-events {
+  margin: 1.5rem 0 0 3.5rem;
 }

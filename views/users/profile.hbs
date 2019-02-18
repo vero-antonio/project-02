@@ -1,27 +1,39 @@
-    <div class="container">
+<div class="container">
 
-      <div class="profile-info">
-        <div>
-          <img class="rounded-circle" src="{{ session.photo }}" alt="profile pic">
-        </div>
-        <div class="profile-info__data">
-          <span class="info-title">Email:</span>
-          <span class="info">{{session.email}}</span>
-          <span class="info-title">Name:</span>
-          <span class="info">{{session.name}}</span>
-        </div>
-      </div>
-
-      <div class="row topics-container">
-        <h4 class="profile-content__title">Select at least 3 topics:</h4>
-        <div id="profile-categories">
-          {{> topics }}
-        </div>
-      </div>
-
+  <form action="/profile" method="POST" id="categories-form">
+    <div class="profile-info">
       <div>
-        <form class="col-12 profile-btn-container" id="categories-form" action="/profile" method='post' >
-              <button type="submit" class="general-button">Edit</button>
-        </form>
+        <img class="rounded-circle" src="{{ session.photo }}" alt="profile pic">
+      </div>
+      <div class="profile-info__data">
+        <label for="email" class="info-title">Email</label>
+        <input type="text" class="form-control info" id="email" name="email" value="{{session.email}}">
+        <label for="name" class="info-title">Name</label>
+        <input type="text" class="form-control info" id="name" name="name" value="{{session.name}}">
       </div>
     </div>
+
+    <div class="row topics-container">
+      <h4 class="profile-content__title">Select at least 3 topics:</h4>
+      <div id="profile-categories">
+        <div class="topics">
+        {{#each allCategories as |category|}}
+            <div class="topics-item">
+                <div class="card categories {{#hasCategories ../session.interests category.id }}{{/hasCategories }}" style="width: 13rem;" data-category='{{category.id}}'> 
+                    <img src="{{category.photo}}" class="card-img-top" alt="{{category.id}}">
+                    <div class="card-body">
+                        <p class="card-text" style="text-align: center">{{category.name}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 profile-btn-container">
+      <button type="submit" class="general-button">Edit</button>
+    </div>
+
+  </form>
+</div>

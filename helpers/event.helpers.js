@@ -62,4 +62,13 @@ module.exports = (hbs) => {
     }
   })
 
+  hbs.registerHelper('isEmptyOfEvents', (eventsArr, options) => {
+    if ( eventsArr.length === 0 ) {
+      return `<h5>Ooops... You are not registered in any event</h5>`;
+    } else {
+      return options.inverse(this);
+    }
+  })
+
+
 }
