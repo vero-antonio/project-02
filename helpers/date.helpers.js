@@ -21,6 +21,14 @@ module.exports = (hbs) => {
     }
   })
 
+  hbs.registerHelper('pastEvent', (date, options) => {
+    if (date < new Date()) {
+      return "selected";
+    } else {
+      return options.inverse(this);
+    }
+  })
+
 }
 
 

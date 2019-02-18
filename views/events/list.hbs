@@ -1,31 +1,33 @@
 <div class="container-fluid list-map-container">
   <div id="map" class="list-map"></div>
 </div>
-
-<div class="container">
-  <form action="/" method="GET">
-    <div class="form-group">
+  <form action="/" method="GET" class="search-form">
+    <div class="form-group search">
       <label for="name">Search for events by name:</label>
       <input type="text" class="form-control" id="name" name="name" value="{{name}}">
     </div>
-    <div class="form-group">
+    <div class="form-group search">
       <label for="location">Search for events by location:</label>
       <input id="pac-input" class="form-control" type="text" placeholder="Add the location">
     </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-    <a class="btn btn-primary" href="/">Show all</a>
+    <button type="submit" class="btn-list">Search</button>
+    <a class="btn-list" href="/">Show all</a>
   </form>
+
+<div class="container">
 
   <div class="row">
     {{#each events as |event|}}
         <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-2 mt-2" style="display: flex; justify-content: center">
             <a class="link-event" href="/detail/{{event.id}}">
             <div class="card event-list" style="width: 18rem;" data-event="{{event.id}}">
-                <img src="{{event.picture}}" class="card-img-top" alt="{{event.name}}">
+                <img src="{{event.picture}}" class="card-img-top card-img-top-list" alt="{{event.name}}">
                 <div class="card-body">
                     <p class="card-text" style="text-align: center">{{event.name}}</p>
-                    <p class="event-date">{{#dateFromNow event.dateRange.start}}{{/dateFromNow }}</p>
-                    <p class="event-date">People attending: {{event.participants.length}}</p>
+                    <div class="data-container-bottom">
+                      <p class="event-date">{{#dateFromNow event.dateRange.start}}{{/dateFromNow }}</p>
+                      <p class="event-attendant">People attending: {{event.participants.length}}</p>
+                    </div>
                 </div>
             </div>
             </a>

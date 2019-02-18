@@ -12,14 +12,16 @@
         </div>
       </div>
 
-      <div class="row">
-        <h4 class="profile-content__title">Interests:</h4>
-        {{> topics }}
+      <div class="row topics-container">
+        <h4 class="profile-content__title">Select at least 3 topics:</h4>
+        <div id="profile-categories">
+          {{> topics }}
+        </div>
       </div>
 
       <div>
-        <form class="col-12" id="categories-form" action="/profile" method='post'>
-              <button type="submit" class="center mt-3 btn btn-secondary">Edit</button>
+        <form class="col-12 profile-btn-container" id="categories-form" action="/profile" method='post' >
+              <button type="submit" class="general-button">Edit</button>
         </form>
       </div>
     </div>

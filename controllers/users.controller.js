@@ -14,15 +14,14 @@ module.exports.updateCategories = (req, res, next) => {
 
 module.exports.profile = (req, res, next) => {
   res.render("users/profile");
+  console.log('esto es interests' + req.user.interests);
+
 };
 
 module.exports.profileUpdate = (req, res, next) => {
-  User.findById(req.user.id)
-    .then(() => {
-      console.log('esto es interests' + req.body.interests);
-      User.findByIdAndUpdate(req.user.id, {interests: req.body.interests})
-        .then(() => res.redirect('/'))
-        .catch((error) => console.log(error));
-    })
+
+  // console.log('esto es interests' + req.body.interests);
+  User.findByIdAndUpdate(req.user.id, {interests: req.body.interests})
+    .then(() => res.redirect('/'))
     .catch((error) => console.log(error));
 }

@@ -42,13 +42,15 @@
     <input type="text" value="{{event.latitude}}" id="latitude" class="hidden" name="latitude"/>
 
     <div class="form-group">
-      <label for="direction">What will your event be about? Select 1 or more topics:</label>
+      <label for="direction" class="label-margin">What will your event be about? Select 1 or more topics:</label>
       {{#if errors.interests }} <div class="invalid-feedback d-block">{{ errors.interests }}</div> {{/if }}
       {{> topics }}
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Done!</button>
+    <div class="profile-btn-container">
+      <button type="submit" class="general-button">Done!</button>
+    </div>
   </form>
   
   {{#if event.longitude}}
@@ -62,3 +64,9 @@
 
 
 </section>
+
+
+      {{!-- <div>
+        <form class="col-12 profile-btn-container" id="categories-form" action="/profile" method='post' >
+        </form>
+      </div> --}}

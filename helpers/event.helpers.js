@@ -28,7 +28,7 @@ module.exports = (hbs) => {
 
 
   hbs.registerHelper('countParticipants', (participants, options) => {
-    let html = '<div class=\"prueba\">';
+    let html = '<div class=\"attendant-card\">';
     const otherParticipants = participants.length - 3;
     if ( participants.length > 3 ) {
       for ( let i = 0; i < 3; i++ ) {

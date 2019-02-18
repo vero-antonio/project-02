@@ -5,7 +5,7 @@ const userMiddleware = require('../middlewares/user.middlewares');
 const upload = require('../configs/multer.config');
 
 router.get('/',
-  userMiddleware.editInterests, 
+  userMiddleware.haveInterests, 
   eventsController.list);
 
 router.get('/create', 

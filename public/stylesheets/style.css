@@ -12,6 +12,10 @@ a {
   margin-top: 40px
 }
 
+.container {
+  margin-bottom: 50px;
+}
+
 .btn {
   background-color: #eb641c !important;
   border-color: #eb641c !important;
@@ -19,6 +23,26 @@ a {
 
 .event-list {
   height: 400px;
+}
+
+.general-button {
+  width: 15rem;
+  height: 2.7rem;
+  background-color: #eb641c;
+  border-color: #eb641c;
+  cursor: pointer;
+  margin-top: 1rem;
+  color: #fff;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  box-sizing: border-box;
 }
 
 /* categories: */
@@ -63,6 +87,10 @@ a {
 
 /* navigation bar: */
 
+.navbar {
+  height: 80px;
+}
+
 .navbar img {
   height: 45px;
 }
@@ -76,13 +104,25 @@ a {
   align-items: center;
 }
 
-.btn-nav-fb {
-  border: none;
-  background-color: none !important;
-  color: white;
-  width: 200px;
-  margin: 180px;
+.btn-fcb {
+  display: flex;
+  width: 13rem;
+  height: 2.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  color: #fff;
+  font-weight: 400;
+  user-select: none;
+  border: 1px solid transparent;
+  line-height: 1.5;
+  margin-right: 7rem;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
 }
+
 
 .popup-align {
   left: -6rem;
@@ -151,7 +191,7 @@ a {
     margin: 4px;
 }
 
-.prueba {
+.attendant-card {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: .4rem;
@@ -196,6 +236,41 @@ a {
 
 }
 
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 2.5rem 2rem 0 2rem;
+}
+
+.search {
+  width: 35%;
+  margin-bottom: 0;
+}
+
+.btn-list {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 8rem;
+  height: 2.3rem;
+  background-color: #eb641c;
+  border-color: #eb641c;
+  cursor: pointer;
+  margin-top: 1rem;
+  color: #fff;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  box-sizing: border-box;
+}
+
 /* unvisited link */
 .link-event:link {
   color: black;
@@ -232,8 +307,31 @@ a {
   text-decoration: none;
 }
 
-.event-date{
-  opacity: 0.4;
+.card-body {
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  justify-content: space-between;
+}
+
+.card-img-top-list {
+  height: 60%;
+}
+
+.event-date {
+  color: #e63c1e;
+  margin-bottom: .5rem;
+}
+
+.event-attendant {
+  color:  #403f3f;
+  margin-bottom: 0;
+}
+
+.data-container-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 
 /*new*/
@@ -244,12 +342,12 @@ a {
 /* profile page */
 
 .profile-info {
-  width: 50%;
+  width: 55%;
   display: flex;
   background: #fff;
   border-radius: 1rem;
   padding: 1rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .profile-info__data {
@@ -259,8 +357,29 @@ a {
   justify-content: center;
 }
 
+.info {
+  margin-bottom: .8rem;
+  font-size: 1.1rem
+}
+
+.info-title {
+  margin-bottom: .3rem;
+  color: #403f3f;
+  font-size: .8rem;
+}
+
+.topics-container {
+  flex-direction: column;
+}
+
 .profile-content__title {
-  margin-left: 1rem;
+  margin: 0 0 2rem 1rem;
+}
+
+.profile-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
 
 /* create event */
@@ -269,3 +388,21 @@ a {
   margin: 0px;
 }
 
+.label-margin {
+  margin: 1rem 0 2rem 0;
+}
+
+/* my events */
+
+.header-my-events {
+  width: 45%;
+  display: flex;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.header-my-events h3{
+  margin: 0;
+}
