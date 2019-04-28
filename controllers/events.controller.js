@@ -220,7 +220,7 @@ module.exports.join = (req, res, next) => {
           });
 
           transporter.sendMail({
-            from: '"NearBy" <alwaysneaby@gmail.com>',
+            from: '"NearBy" <thisisnearby@gmail.com>',
             to: req.user.email,
             subject: `Asistirás a: ${event.name}`,
             text: `Te acabas de inscribir al evento: ${event.name}! añádelo a tu calendario con el fichero adjunto.`,

@@ -58,14 +58,18 @@ module.exports = {
         {    
             id: "tech",
             photo: "/images/tech01.JPG",
-            name: "Technology & Inovation",
+            name: "Technology & Innovation",
         }, 
     ],
     
-    OWNERS: ["5c6943294a9e640017e4b829",
-            "5c6943e04a9e640017e4b82a",
-            "5c6944634a9e640017e4b82b",
-            "5c6944be4a9e640017e4b82c"]
+    OWNERS: ["5cbc89b04a685b105b95bf0b",
+            "5cbca22800dbf9183d308430",
+            "5cbca27700dbf9183d308431",
+            "5cbca44f00dbf9183d308432",
+            "5cbca51300dbf9183d308433"]
+  
 }
+
+
 
 

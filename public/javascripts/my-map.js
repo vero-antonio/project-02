@@ -21,12 +21,12 @@ class MyMap {
           "elementType": "geometry",
           "stylers": [
             {
-              "color": "#242f3e"
+              "color": "#f5f5f5"
             }
           ]
         },
         {
-          "elementType": "labels",
+          "elementType": "labels.icon",
           "stylers": [
             {
               "visibility": "off"
@@ -37,7 +37,7 @@ class MyMap {
           "elementType": "labels.text.fill",
           "stylers": [
             {
-              "color": "#746855"
+              "color": "#616161"
             }
           ]
         },
@@ -45,21 +45,31 @@ class MyMap {
           "elementType": "labels.text.stroke",
           "stylers": [
             {
-              "color": "#242f3e"
+              "color": "#f5f5f5"
             }
           ]
         },
         {
-          "featureType": "administrative.locality",
+          "featureType": "administrative.land_parcel",
           "elementType": "labels.text.fill",
           "stylers": [
             {
-              "color": "#d59563"
+              "color": "#bdbdbd"
             }
           ]
         },
         {
-          "featureType": "administrative.neighborhood",
+          "featureType": "poi",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#eeeeee"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels.text",
           "stylers": [
             {
               "visibility": "off"
@@ -71,7 +81,23 @@ class MyMap {
           "elementType": "labels.text.fill",
           "stylers": [
             {
-              "color": "#d59563"
+              "color": "#757575"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.business",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "stylers": [
+            {
+              "color": "#85bd72"
             }
           ]
         },
@@ -80,7 +106,25 @@ class MyMap {
           "elementType": "geometry",
           "stylers": [
             {
-              "color": "#263c3f"
+              "color": "#e5e5e5"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "color": "#c2d6a9"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "geometry.stroke",
+          "stylers": [
+            {
+              "color": "#929000"
             }
           ]
         },
@@ -89,7 +133,7 @@ class MyMap {
           "elementType": "labels.text.fill",
           "stylers": [
             {
-              "color": "#6b9a76"
+              "color": "#9e9e9e"
             }
           ]
         },
@@ -98,25 +142,25 @@ class MyMap {
           "elementType": "geometry",
           "stylers": [
             {
-              "color": "#38414e"
+              "color": "#ffffff"
             }
           ]
         },
         {
           "featureType": "road",
-          "elementType": "geometry.stroke",
+          "elementType": "labels.icon",
           "stylers": [
             {
-              "color": "#212a37"
+              "visibility": "off"
             }
           ]
         },
         {
-          "featureType": "road",
+          "featureType": "road.arterial",
           "elementType": "labels.text.fill",
           "stylers": [
             {
-              "color": "#9ca5b3"
+              "color": "#757575"
             }
           ]
         },
@@ -125,16 +169,7 @@ class MyMap {
           "elementType": "geometry",
           "stylers": [
             {
-              "color": "#746855"
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry.stroke",
-          "stylers": [
-            {
-              "color": "#1f2835"
+              "color": "#dadada"
             }
           ]
         },
@@ -143,25 +178,42 @@ class MyMap {
           "elementType": "labels.text.fill",
           "stylers": [
             {
-              "color": "#f3d19c"
+              "color": "#616161"
+            }
+          ]
+        },
+        {
+          "featureType": "road.local",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#9e9e9e"
             }
           ]
         },
         {
           "featureType": "transit",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "transit.line",
           "elementType": "geometry",
           "stylers": [
             {
-              "color": "#2f3948"
+              "color": "#e5e5e5"
             }
           ]
         },
         {
           "featureType": "transit.station",
-          "elementType": "labels.text.fill",
+          "elementType": "geometry",
           "stylers": [
             {
-              "color": "#d59563"
+              "color": "#eeeeee"
             }
           ]
         },
@@ -170,7 +222,16 @@ class MyMap {
           "elementType": "geometry",
           "stylers": [
             {
-              "color": "#17263c"
+              "color": "#c9c9c9"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "color": "#9dd1e1"
             }
           ]
         },
@@ -179,20 +240,11 @@ class MyMap {
           "elementType": "labels.text.fill",
           "stylers": [
             {
-              "color": "#515c6d"
-            }
-          ]
-        },
-        {
-          "featureType": "water",
-          "elementType": "labels.text.stroke",
-          "stylers": [
-            {
-              "color": "#17263c"
+              "color": "#9e9e9e"
             }
           ]
         }
-      ]           
+      ]
     });
 
     if (window.eventPoints && window.eventPoints.length > 0) {

@@ -1,3 +1,5 @@
+// ejecutar en terminal: node bin/seeds.js
+
 const mongoose = require('mongoose');
 const User = require('../models/user.model');
 const Event = require("../models/event.model");
@@ -25,7 +27,7 @@ function getRandomNum(numMax) {
 
 
 Event.deleteMany({}).then(console.log);
-User.deleteMany({}).then(console.log);
+// User.deleteMany({}).then(console.log);
 Schedule.deleteMany({}).then(console.log);
 
 // Build events

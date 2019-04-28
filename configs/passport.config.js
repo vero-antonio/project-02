@@ -13,7 +13,7 @@ passport.deserializeUser((id, next) => {
     })
     .catch(error => next(error));
 });
-
+ 
 passport.use('facebook-auth', new FBStrategy({
   clientID: process.env.FB_AUTH_CLIENT_ID || 'todo',
   clientSecret: process.env.FB_AUTH_CLIENT_SECRET || 'todo',

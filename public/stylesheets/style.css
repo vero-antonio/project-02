@@ -25,6 +25,15 @@ a {
   height: 400px;
 }
 
+.profile-img {
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 0;
+  margin: 10px;
+}
+
 .general-button {
   width: 15rem;
   height: 2.7rem;
@@ -179,6 +188,7 @@ a {
   justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    object-fit: cover;
 }
 
 .attendee-pic{
