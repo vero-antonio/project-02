@@ -29,8 +29,6 @@ function authenticateOAuthUser(accessToken, refreshToken, profile, next) {
         next(null, user);
       } else {
         user = new User({          
-          // likes: profile.user_likes, we can put more permissions but have to submit
-          // the app for facebook to review it usually takes 2-3 days to get approval.
           name: profile.displayName,
           email: profile.emails[0].value,
           photo: profile.photos[0].value,
